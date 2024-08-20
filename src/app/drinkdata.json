@@ -1,0 +1,38 @@
+{
+    "brands":[
+        "Coca-Cola",
+        "Deer Park",
+        "Fiji Water",
+        "Gatorade",
+        "Red Bull"
+    ],
+    "types":[
+        "alcohol",
+        "coffee",
+        "energy",
+        "juice",
+        "seltzer",
+        "soda",
+        "tea",
+        "water"
+    ],
+    "drinks":[
+        {
+            "brand": "Coca-Cola",
+            "name": "Coca-Cola",
+            "type": "soda"
+        },
+        {
+            "brand": "Deer Park",
+            "name": "Deer Park Natural Spring Water",
+            "type": "water"
+        },
+        {
+            "brand": "Fiji Water",
+            "name": "FIJI",
+            "type": "water"
+        }
+    ]
+    
+}
+
