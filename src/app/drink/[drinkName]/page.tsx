@@ -4,6 +4,7 @@ import { FaStarHalfAlt } from "react-icons/fa";
 import { FaStar } from "react-icons/fa";
 import drinkData from '@/app/drinkdata.json';
 import Link from 'next/link'
+import {pixelify} from '@/app/ui/fonts'
 
 /** Binary Search json Data, returns index of correct drink */
 let binarySearch = function(arr:any, drink:string, start:number, end:number) {
@@ -53,7 +54,7 @@ export default function Page({params}:{
                     <FaRegStar />
                 </div>
 
-                <button type="button" className="w-32 border-2 border-black hover:bg-gray-200">Review</button>
+                <button type="button" className={`${pixelify.className} w-32 border-2 border-black hover:border-red-500 hover:text-red-500 hover:font-bold`}>Review</button>
             </div>
 
             
