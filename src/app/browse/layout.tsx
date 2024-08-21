@@ -13,7 +13,7 @@ export default function Layout({children}: {children:React.ReactNode}) {
                 <h1 className="font-bold text-3xl sm:text-4xl md:text-5xl">
                     Browse Drinks By
                 </h1>
-                <div className="flex justify-center space-x-16 md:space-x-32">
+                <div className="flex justify-center space-x-12 md:space-x-32">
                     <BrowseButton pathName="/browse/type" buttonName="Type"/>
                     <BrowseButton pathName="/browse/brand" buttonName="Brand"/>
                     <BrowseButton pathName="/browse/all" buttonName="All"/>
