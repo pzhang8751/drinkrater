@@ -14,7 +14,7 @@ export default function Home() {
           <h1 className={`${pixelify.className} mt-3 text-7xl sm:text-8xl md:text-9xl self-center`}>
             Drink<span className="italic">rater</span>
           </h1>
-          <p className="mt-8 text-lg sm:text-xl md:text-2xl self-center">
+          <p className="mt-8 text-md sm:text-xl md:text-2xl self-center">
             Your one stop search for your next favorite drink. 
           </p>
         </div>
