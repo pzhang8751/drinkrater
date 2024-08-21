@@ -37,10 +37,10 @@ export default function BrosweNav() {
                     <Link id="browse" href="/browse/type" onMouseOver={openDropDown} onClick={closeDropDown} className={clsx("hover:font-bold hover:text-red-500",{"text-red-500":pathName.includes("/browse")})}>BROWSE</Link>
                 </div>
                 <div onMouseOver={closeDropDown} className="min-w-5 max-w-10 flex-auto"></div>
-                <div onMouseOver={closeDropDown} className="flex justify-center items-center space-x-5 text-nowrap mr-4">
+                {/* <div onMouseOver={closeDropDown} className="flex justify-center items-center space-x-5 text-nowrap mr-4">
                     <Link href="" className="h-min outline px-2 py-0.5 hover:bg-orange-300">Log In</Link>
                     <Link href="" className="h-min outline px-2 py-0.5 hover:bg-blue-300">Sign Up</Link>
-                </div>
+                </div> */}
             </div>
             <div id="dropdown" onMouseLeave={closeDropDown} className="invisible">
                 <BrowseDropdown />
