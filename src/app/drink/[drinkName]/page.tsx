@@ -1,3 +1,4 @@
+
 import { create } from "domain";
 import { FaRegStar } from "react-icons/fa";
 import { FaStarHalfAlt } from "react-icons/fa";
@@ -5,6 +6,8 @@ import { FaStar } from "react-icons/fa";
 import drinkData from '@/app/drinkdata.json';
 import Link from 'next/link'
 import {pixelify} from '@/app/ui/fonts'
+
+// import { openReview } from "@/app/layout";
 
 /** Binary Search json Data, returns index of correct drink */
 let binarySearch = function(arr:any, drink:string, start:number, end:number) {
@@ -31,6 +34,8 @@ export default function Page({params}:{
 }) {
     let drink = drinkData.drinks[binarySearch(drinkData.drinks, decodeURI(params.drinkName), 0, drinkData.drinks.length-1)];
 
+    /**  useState for the review popup window */
+
     return (
         <main className="mt-10 grid grid-cols-1 sm:grid-cols-2 px-16 gap-y-5 gap-x-5">
             <div className="h-72 border border-black">
@@ -56,8 +61,10 @@ export default function Page({params}:{
 
                 <button type="button" className={`${pixelify.className} w-32 border-2 border-black hover:border-red-500 hover:text-red-500 hover:font-bold`}>Review</button>
             </div>
-
             
+            {/* <div className="h-screen w-screen fixed bg-black opacity-50 z-30">
+
+            </div> */}
         </main>
     );
 }
