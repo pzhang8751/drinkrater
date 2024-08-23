@@ -4,29 +4,21 @@ import Link from 'next/link'
 import BrowseDropdown from './browsedropdown';
 import {pixelify} from '@/app/ui/fonts'
 import { usePathname } from 'next/navigation';
+import {useState} from 'react'
 import clsx from 'clsx'
-
-/** Definitely need to find a better solution for this
- * Look more into Usestate?? 
- */
-
-function openDropDown() {
-    const dropDown = document.getElementById("dropdown"); 
-    dropDown?.classList.remove("invisible");
-    dropDown?.classList.add("visible");
-
-    console.log();
-}
-
-function closeDropDown() {
-    const dropDown = document.getElementById("dropdown");
-    dropDown?.classList.add("invisible");
-    dropDown?.classList.remove("visible");
-}
 
 export default function BrosweNav() {
     const pathName = usePathname(); 
-    //const dropDown = document.getElementById("dropDown");
+
+    const [dropdown, setDropdown] = useState(false);
+
+    function openDropDown() {
+        setDropdown(true);
+    }
+
+    function closeDropDown() {
+        setDropdown(false);
+    }
 
     return (
         <div>
@@ -42,7 +34,7 @@ export default function BrosweNav() {
                     <Link href="" className="h-min outline px-2 py-0.5 hover:bg-blue-300">Sign Up</Link>
                 </div> */}
             </div>
-            <div id="dropdown" onMouseLeave={closeDropDown} className="invisible">
+            <div id="dropdown" onMouseLeave={closeDropDown} onClick={closeDropDown} className={clsx({"invisible":dropdown===false},{"visible":dropdown===true})}>
                 <BrowseDropdown />
             </div>
 
