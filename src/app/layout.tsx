@@ -8,18 +8,6 @@ export const metadata: Metadata = {
   description: "Find and rate your next favorite drink"
 };
 
-import ReviewWindow from "@/app/ui/reviewwindow";
-
-let isOpen = true;
-
-export function openReview() {
-  isOpen = true;
-}
-
-export function closeReview() {
-  isOpen = false; 
-}
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -28,13 +16,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${noto.className}`}>
-        {/* <ReviewWindow params={{
-          open: isOpen
-        }} /> */}
         <BrowseNav/>
         {children}
-
-
       </body>
     </html>
   );
