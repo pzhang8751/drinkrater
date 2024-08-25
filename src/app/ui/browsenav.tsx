@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation';
 import {useState} from 'react'
 import clsx from 'clsx'
 
-export default function BrosweNav() {
+export default function BrowseNav() {
     const pathName = usePathname(); 
 
     const [dropdown, setDropdown] = useState(false);

@@ -1,20 +1,24 @@
 import type { Metadata } from "next";
 import {noto} from '@/app/ui/fonts'
 import "./globals.css";
-import BrosweNav from "./ui/browsenav";
-
-// import ReviewWindow from "@/app/ui/reviewwindow";
+import BrowseNav from "./ui/browsenav";
 
 export const metadata: Metadata = {
   title: "Welcome to Drinkrater",
   description: "Find and rate your next favorite drink"
 };
 
-// let isOpen = true;
+import ReviewWindow from "@/app/ui/reviewwindow";
 
-// export function openReview() {
-//   isOpen = true;
-// }
+let isOpen = true;
+
+export function openReview() {
+  isOpen = true;
+}
+
+export function closeReview() {
+  isOpen = false; 
+}
 
 export default function RootLayout({
   children,
@@ -27,8 +31,9 @@ export default function RootLayout({
         {/* <ReviewWindow params={{
           open: isOpen
         }} /> */}
-        <BrosweNav/>
+        <BrowseNav/>
         {children}
+
 
       </body>
     </html>

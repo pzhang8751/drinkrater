@@ -1,3 +1,4 @@
+"use client";
 
 import { create } from "domain";
 import { FaRegStar } from "react-icons/fa";
@@ -6,7 +7,8 @@ import { FaStar } from "react-icons/fa";
 import drinkData from '@/app/drinkdata.json';
 import Link from 'next/link'
 import {pixelify} from '@/app/ui/fonts'
-
+import Modal from 'react-modal'
+import Popup from "reactjs-popup";
 // import { openReview } from "@/app/layout";
 
 /** Binary Search json Data, returns index of correct drink */
@@ -27,6 +29,8 @@ function createStars() {
     );
 }
 
+
+
 export default function Page({params}:{
     params:{
         drinkName:string
@@ -35,6 +39,16 @@ export default function Page({params}:{
     let drink = drinkData.drinks[binarySearch(drinkData.drinks, decodeURI(params.drinkName), 0, drinkData.drinks.length-1)];
 
     /**  useState for the review popup window */
+
+    function reviewWindow() {
+        return (
+            <Popup trigger={<button type="button" className={`${pixelify.className} w-32 border-2 border-black hover:border-red-500 hover:text-red-500 hover:font-bold`}>Review</button>} modal>
+                <div className="h-screen w-screen bg-black opacity-50">
+
+                </div>
+            </Popup>
+        );
+    }
 
     return (
         <main className="mt-10 grid grid-cols-1 sm:grid-cols-2 px-16 gap-y-5 gap-x-5">
@@ -59,8 +73,10 @@ export default function Page({params}:{
                     <FaRegStar />
                 </div>
 
-                <button type="button" className={`${pixelify.className} w-32 border-2 border-black hover:border-red-500 hover:text-red-500 hover:font-bold`}>Review</button>
+                {reviewWindow()}
             </div>
+
+
             
             {/* <div className="h-screen w-screen fixed bg-black opacity-50 z-30">
 
