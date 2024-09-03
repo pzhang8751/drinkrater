@@ -20,7 +20,7 @@ function links(category: string) {
     return (
         <>
             {linkArrayData.map((data) => {
-                console.log(data);
+                // console.log(data);
                 return (<Link key={"browse_link_" + data} href={"/browse/" + category + "/" + data} className="hover:underline">{data[0].toUpperCase()+data.slice(1)}</Link>);
             })}
         </>

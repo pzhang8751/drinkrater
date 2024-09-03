@@ -7,8 +7,11 @@ import { FaStar } from "react-icons/fa";
 import drinkData from '@/app/drinkdata.json';
 import Link from 'next/link'
 import {pixelify} from '@/app/ui/fonts'
-import Modal from 'react-modal'
 import Popup from "reactjs-popup";
+import { RxCross1 } from "react-icons/rx";
+import { useState } from "react";
+import TagForm from "@/app/ui/tagform";
+
 // import { openReview } from "@/app/layout";
 
 /** Binary Search json Data, returns index of correct drink */
@@ -22,15 +25,6 @@ let binarySearch = function(arr:any, drink:string, start:number, end:number) {
     else return binarySearch(arr, drink, mid+1, end);
 }
 
-function createStars() {
-    return (
-        <>
-        </>
-    );
-}
-
-
-
 export default function Page({params}:{
     params:{
         drinkName:string
@@ -38,13 +32,35 @@ export default function Page({params}:{
 }) {
     let drink = drinkData.drinks[binarySearch(drinkData.drinks, decodeURI(params.drinkName), 0, drinkData.drinks.length-1)];
 
+    function createStars() {
+        return (
+            <>
+            </>
+        );
+    }
+
     /**  useState for the review popup window */
 
-    function reviewWindow() {
-        return (
-            <Popup trigger={<button type="button" className={`${pixelify.className} w-32 border-2 border-black hover:border-red-500 hover:text-red-500 hover:font-bold`}>Review</button>} modal>
-                <div className="h-screen w-screen bg-black opacity-50">
+    const [open, setOpen] = useState(false);
+    const closeWindow = () => setOpen(false); 
+    const openWindow = () => setOpen(true); 
 
+    function submitReview() {
+        closeWindow();
+    }
+
+    function reviewWindow(drinkName:string) {
+
+        return (
+            <Popup  modal open={open}>
+               <div className="h-screen w-screen bg-black bg-opacity-50 grid justify-center">
+                    <div className="h-64 w-64 bg-white self-center rounded-lg flex flex-col">
+                        <RxCross1 onClick={closeWindow} className="hover:text-red-500 hover:cursor-pointer" size={30}/>
+                        <p className="font-bold self-center">{drinkName}</p>
+                        <hr className="w-56 border-black border-1 self-center"/>
+                        {TagForm()}
+                        <button type="submit" form="tagForm" onClick={submitReview} className={`${pixelify.className} w-32 border-2 border-black hover:border-red-500 hover:text-red-500 hover:font-bold`}>Submit Review</button>
+                    </div>
                 </div>
             </Popup>
         );
@@ -58,7 +74,7 @@ export default function Page({params}:{
             <div className="flex flex-col gap-y-5">
                 <div>
                     <h1 className="font-bold text-5xl ">
-                        {decodeURI(params.drinkName)}
+                        {drink.name}
                     </h1>
                     <Link href={"/browse/brand/" + drink.brand}>
                         <h2 className="mt-1 text-3xl">
@@ -66,21 +82,13 @@ export default function Page({params}:{
                         </h2>
                     </Link>
                 </div>
-
- 
                 <div>
                     {createStars()}
                     <FaRegStar />
                 </div>
-
-                {reviewWindow()}
+                <button type="button" onClick={openWindow} className={`${pixelify.className} w-32 border-2 border-black hover:border-red-500 hover:text-red-500 hover:font-bold`}>Review</button>
             </div>
-
-
-            
-            {/* <div className="h-screen w-screen fixed bg-black opacity-50 z-30">
-
-            </div> */}
+            {reviewWindow(drink.name)}
         </main>
     );
 }

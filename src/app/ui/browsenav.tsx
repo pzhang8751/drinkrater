@@ -34,7 +34,10 @@ export default function BrowseNav() {
                     <Link href="" className="h-min outline px-2 py-0.5 hover:bg-blue-300">Sign Up</Link>
                 </div> */}
             </div>
-            <div id="dropdown" onMouseLeave={closeDropDown} onClick={closeDropDown} className={clsx({"invisible":dropdown===false},{"visible":dropdown===true})}>
+            {/* <div id="dropdown" onMouseLeave={closeDropDown} onClick={closeDropDown} className={clsx({"invisible":dropdown===false},{"visible":dropdown===true})}>
+                <BrowseDropdown />
+            </div> */}
+            <div id="dropdown" onMouseLeave={closeDropDown} onClick={closeDropDown} className={(dropdown ? "visible":"invisible")}>
                 <BrowseDropdown />
             </div>
 

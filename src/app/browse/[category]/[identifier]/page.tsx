@@ -1,4 +1,3 @@
-import drinkdata from '@/app/drinkdata.json'
 
 import drinkData from "@/app/drinkdata.json"
 import DrinkDisplayCard from "@/app/ui/drinkdisplaycard";
