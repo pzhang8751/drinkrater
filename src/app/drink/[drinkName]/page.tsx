@@ -54,12 +54,20 @@ export default function Page({params}:{
         return (
             <Popup  modal open={open}>
                <div className="h-screen w-screen bg-black bg-opacity-50 grid justify-center">
-                    <div className="h-64 w-64 bg-white self-center rounded-lg flex flex-col">
-                        <RxCross1 onClick={closeWindow} className="hover:text-red-500 hover:cursor-pointer" size={30}/>
-                        <p className="font-bold self-center">{drinkName}</p>
-                        <hr className="w-56 border-black border-1 self-center"/>
-                        {TagForm()}
-                        <button type="submit" form="tagForm" onClick={submitReview} className={`${pixelify.className} w-32 border-2 border-black hover:border-red-500 hover:text-red-500 hover:font-bold`}>Submit Review</button>
+                    <div className="h-3/4 w-72 sm:w-128 md:w-160 bg-white self-center rounded-lg flex flex-col overflow-y-auto">
+                        <div className="mt-1 ml-1">
+                            <RxCross1 onClick={closeWindow} className="hover:text-red-500 hover:cursor-pointer" size="20"/>
+                        </div>
+                        
+                        <p className="mt-2 font-bold self-center text-lg sm:text-xl md:text-2xl">{drinkName}</p>
+                        <hr className="w-5/6 my-1 border-black border-1 self-center"/>
+                        <div className="ml-2">
+                            {TagForm()}
+                            
+                        </div>
+                        <button type="submit" form="tagForm" onClick={submitReview} className={`${pixelify.className} w-32 mr-2 self-end border-2 text-lg  border-black hover:border-red-500 hover:text-red-500 hover:font-bold`}>Submit</button>
+                        
+                        
                     </div>
                 </div>
             </Popup>

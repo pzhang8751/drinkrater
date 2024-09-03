@@ -7,6 +7,6 @@ export default function Tag(tag: string) {
 
     return (
         <input type="button" onClick={()=>{setSelected(!selected)}} data-value={"hello"} name={tag} value={tag} key={tag} id={tag} 
-        className={clsx(`${pixelify.className} rounded-2xl border-black border-2 px-2 hover:cursor-pointer`, {"bg-pink-400":selected})}></input>
+        className={clsx(`${pixelify.className} rounded-2xl mr-2 mb-2 border-black border-2 px-2 hover:cursor-pointer`, {"bg-pink-400":selected})}></input>
     );
 }

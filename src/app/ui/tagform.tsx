@@ -21,9 +21,11 @@ export default function TagForm() {
 
     return (
         <form action={FormAction} id="tagForm">
-            <div>
+            <div className="flex flex-col space-y-2">
+                <label htmlFor="stars" className="font-bold">Rating</label>
+                <div id="stars"></div>
                 <label htmlFor="tags" className="font-bold">Tags</label>
-                <div id="tags" className="space-y-3 place-items-start">  
+                <div id="tags" className="place-items-start flex flex-wrap">  
                     {
                         drinkData.tags.map((tag)=>{
                         return Tag(tag)})
