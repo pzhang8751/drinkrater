@@ -1,4 +1,4 @@
-"use client";
+'use client'
 
 import { create } from "domain";
 import { FaRegStar } from "react-icons/fa";
@@ -47,6 +47,8 @@ export default function Page({params}:{
 
     function submitReview() {
         closeWindow();
+
+        console.log(document.getElementById("Parties")?.getAttribute("data-value"))
     }
 
     function reviewWindow(drinkName:string) {
@@ -63,9 +65,9 @@ export default function Page({params}:{
                         <hr className="w-5/6 my-1 border-black border-1 self-center"/>
                         <div className="ml-2">
                             {TagForm()}
-                            
                         </div>
-                        <button type="submit" form="tagForm" onClick={submitReview} className={`${pixelify.className} w-32 mr-2 self-end border-2 text-lg  border-black hover:border-red-500 hover:text-red-500 hover:font-bold`}>Submit</button>
+                        <div className="flex-auto"></div>
+                        <button onClick={submitReview} className={`${pixelify.className} w-32 mr-2 mb-2 place-self-end border-2 text-lg  border-black hover:border-red-500 hover:text-red-500 hover:font-bold`}>Submit</button>
                         
                         
                     </div>
