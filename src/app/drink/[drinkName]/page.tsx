@@ -43,17 +43,17 @@ export default async function Page({ params }: {
     // console.log("Average Stars " + averageStars);
 
     return (
-        <main className="mt-10 grid grid-cols-1 sm:grid-cols-2 px-16 gap-y-5 gap-x-5 overflow-y-auto">
+        <main className="mt-10 grid grid-cols-1 sm:grid-cols-2 px-16 gap-y-5 gap-x-5">
             <div className="h-72 border border-black">
                 {/** decide whether to use Next Image or img */}
             </div>
             <div className="flex flex-col gap-y-5">
                 <div>
-                    <h1 className="font-bold text-5xl ">
+                    <h1 className="font-bold text-xl sm:text-5xl ">
                         {drink.name}
                     </h1>
                     <Link href={"/browse/brand/" + drink.brand}>
-                        <h2 className="mt-1 text-3xl">
+                        <h2 className="mt-1 text-lg sm:text-3xl">
                             {drink.brand}
                         </h2>
                     </Link>
