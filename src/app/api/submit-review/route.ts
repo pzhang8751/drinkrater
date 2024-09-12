@@ -1,0 +1,31 @@
+
+import { sql } from '@vercel/postgres';
+import { NextApiRequest, NextApiResponse } from 'next';
+import { NextRequest, NextResponse } from 'next/server';
+
+// console.log({
+//   POSTGRES_URL: process.env.POSTGRES_URL,
+//   POSTGRES_URL_NON_POOLING: process.env.POSTGRES_URL_NON_POOLING
+// });
+
+export async function POST(req: Request) {
+  const data = await req.json();
+  const name = data["name"];
+  const stars = data["stars"];
+  const tags = data["tags"];
+
+  try {
+    if (!name) {
+      throw new Error("Drink name must be declared!")
+    }
+    if (stars <= 0) {
+      throw new Error("Please pick a star rating!")
+    }
+    await sql`INSERT INTO ratings VALUES (${name}, ${stars}, ${tags});`;
+  } catch (error) {
+    return NextResponse.json({ error }, { status: 500 });
+  }
+
+  const drink = await sql`SELECT * FROM Ratings;`;
+  return NextResponse.json({ drink }, { status: 200 });
+}
