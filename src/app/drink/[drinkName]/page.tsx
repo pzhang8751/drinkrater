@@ -2,6 +2,7 @@
 import drinkData from '@/app/drinkdata.json';
 import Link from 'next/link'
 import ReviewButton from '@/app/ui/reivewbutton';
+import Image from 'next/image';
 
 import { fetchDrinkData } from "@/lib/data";
 import StarDisplay from "@/app/ui/stardisplay";
@@ -77,8 +78,8 @@ export default async function Page({params} : {
 
     return (
         <main className="mt-10 grid grid-cols-1 sm:grid-cols-2 px-16 gap-y-5 gap-x-5">
-            <div className="h-72 border border-black">
-                {/** decide whether to use Next Image or img */}
+            <div className="h-128 border border-black relative">
+                <Image fill={true} objectFit='contain' src={'/drinkImages/' + drink.name + '.jpg'} alt={"Image of " + drink.name} /> 
             </div>
             <div className="flex flex-col gap-y-3">
                 <div>
