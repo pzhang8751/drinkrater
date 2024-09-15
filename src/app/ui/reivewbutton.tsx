@@ -6,23 +6,47 @@ import { useState } from "react";
 import TagForm from "@/app/ui/tagform";
 import { pixelify } from "./fonts";
 
+import { useAppSelector } from "@/lib/store";
+
+import { updateStars } from "@/lib/features/starSlice";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/lib/store";
+
 export default function ReviewButton({params} : {params:{name:string}}) {
+    const dispatch = useDispatch<AppDispatch>()
+    /** window open / close */
     const [open, setOpen] = useState(false);
-    const closeWindow = () => setOpen(false);
+    const closeWindow = () => {
+        setOpen(false)
+        dispatch(updateStars(0))
+    };
     const openWindow = () => setOpen(true);
-    
+
+    /** get tag states */
+    const tags = useAppSelector((state) => state.tagReducer.items)
+    const stars = useAppSelector((state) => state.starReducer).stars
+
+    function getTagData() {
+        return Object.keys(tags).map((id)=> {
+            const tag = tags[id]
+            if (tag.isSelected) {
+                return (id)
+            }
+        })
+    }
+
     async function submitReview() {
-        console.log(document.getElementById("Parties")?.getAttribute("data-value"))
+        console.log("STARS " + stars)
 
         await fetch('/api/submit-review', {
             method: 'POST',
             body: JSON.stringify({
                 "name" : params.name, 
-                "stars" : 5,
-                "tags" : "none"
-            })
+                "stars" : stars,
+                "tags" : getTagData()
+            }),
+            next: {tags : ['review_' + params.name]}
         })
-        
         closeWindow()
     }
 

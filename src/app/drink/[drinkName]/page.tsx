@@ -1,11 +1,13 @@
 
-
 import drinkData from '@/app/drinkdata.json';
 import Link from 'next/link'
 import ReviewButton from '@/app/ui/reivewbutton';
 
 import { fetchDrinkData } from "@/lib/data";
 import StarRating from "@/app/ui/starrating";
+import { GetStaticProps, GetStaticPaths } from 'next';
+import { useParams } from 'next/navigation';
+import { ParsedUrlQuery } from 'querystring';
 
 /** Binary Search JSON Data, returns index of correct drink */
 let binarySearch = function (arr: any, drink: string, start: number, end: number) {
@@ -18,16 +20,27 @@ let binarySearch = function (arr: any, drink: string, start: number, end: number
     else return binarySearch(arr, drink, mid + 1, end);
 }
 
-export default async function Page({ params }: {
+export const revalidate = 60; 
+
+export const dynamicParams = true
+
+export async function generateStaticParams() {
+    let drinks = drinkData.drinks.map((drink) => ({
+        drinkName : drink.name
+    }))
+    // console.log(drinks)
+    return drinks
+}
+
+export default async function Page({params} : {
     params: {
-        drinkName: string
+        drinkName : string
     }
 }) {
-    let drink = drinkData.drinks[binarySearch(drinkData.drinks, decodeURI(params.drinkName), 0, drinkData.drinks.length - 1)];
-
+    let drink = drinkData.drinks[binarySearch(drinkData.drinks, decodeURI(params.drinkName), 0, drinkData.drinks.length - 1)]; 
     const reviewData = await fetchDrinkData(drink.name);
+    // console.log(drink.name);
     let averageStars;
-
     // logic to determine the average star rating for the drink
     if (reviewData.length == 0) {
         averageStars = 0

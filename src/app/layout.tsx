@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import {noto} from '@/app/ui/fonts'
 import "./globals.css";
 import BrowseNav from "./ui/browsenav";
+import StoreProvider from "./StoreProvider";
 
 export const metadata: Metadata = {
   title: "Welcome to Drinkrater",
@@ -17,7 +18,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${noto.className}`}>
         <BrowseNav/>
-        {children}
+        <StoreProvider>{children}</StoreProvider>
       </body>
     </html>
   );
