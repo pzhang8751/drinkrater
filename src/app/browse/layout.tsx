@@ -21,6 +21,7 @@ export default function Layout({children}: {children:React.ReactNode}) {
                 <hr className="w-[calc(100vw-12rem)] border-black border-1"/>
             </div>
             {children}
+            <div className='h-12'></div>
         </main>
  
     );

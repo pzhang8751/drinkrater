@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image';
 
 export default function DrinkDisplayCard({params}:{
     params:{
@@ -9,7 +10,11 @@ export default function DrinkDisplayCard({params}:{
     return (
         <Link href={"/drink/" + params.drinkName}>
             <div className="h-80 w-64 flex flex-col border border-black">
-                {/**Decide whether to use Next Js Image or regular img */}
+
+                <div className="h-64 relative">
+                    <Image fill={true} style={{objectFit:'contain'}} src={'/drinkImages/' + params.drinkName + '.jpg'} alt={"Image of " + params.drinkName}/> 
+                </div>
+                
                 <p className="font-bold text-lg pl-2">
                     {params.drinkName}
                 </p>
