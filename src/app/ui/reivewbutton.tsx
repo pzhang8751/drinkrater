@@ -5,12 +5,13 @@ import { RxCross1 } from "react-icons/rx";
 import { useState } from "react";
 import TagForm from "@/app/ui/tagform";
 import { pixelify } from "./fonts";
+import drinkData from "@/app/drinkdata.json"
 
 import { useAppSelector } from "@/lib/store";
-
 import { updateStars } from "@/lib/features/starSlice";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/lib/store";
+import { updateTag } from "@/lib/features/tagSlice";
 
 export default function ReviewButton({params} : {params:{name:string}}) {
     const dispatch = useDispatch<AppDispatch>()
@@ -19,6 +20,9 @@ export default function ReviewButton({params} : {params:{name:string}}) {
     const closeWindow = () => {
         setOpen(false)
         dispatch(updateStars(0))
+        drinkData.tags.forEach((tag) => {
+            dispatch(updateTag({id:tag, value:false}))
+        })
     };
     const openWindow = () => setOpen(true);
 
