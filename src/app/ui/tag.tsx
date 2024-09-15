@@ -11,15 +11,18 @@ import { AppDispatch, useAppSelector } from "@/lib/store";
 export default function Tag(tag: string) {
     const dispatch = useDispatch<AppDispatch>()
     const tags = useAppSelector((state) => state.tagReducer.items[tag])
+    const [selected, setSelected] = useState(false);
 
-    const [selected, setSelected] = useState(tags.isSelected);
-    
     /** logic to prevent depth error */
     useEffect(() => {
         if (tags === undefined) {
             dispatch(addTag({id: tag, item: {isSelected : false}}));
+        } else {
+            setSelected(tags.isSelected)
         }
     }, [dispatch, tag, tags])
+
+    
 
     const onClickSelect = () => {
         if (selected === true) {

@@ -5,9 +5,6 @@ import ReviewButton from '@/app/ui/reivewbutton';
 
 import { fetchDrinkData } from "@/lib/data";
 import StarRating from "@/app/ui/starrating";
-import { GetStaticProps, GetStaticPaths } from 'next';
-import { useParams } from 'next/navigation';
-import { ParsedUrlQuery } from 'querystring';
 
 /** Binary Search JSON Data, returns index of correct drink */
 let binarySearch = function (arr: any, drink: string, start: number, end: number) {
