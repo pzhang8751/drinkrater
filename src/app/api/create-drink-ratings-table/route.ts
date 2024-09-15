@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server'
 
 export async function GET(request: Request) {
     try {
-        const result = await sql`CREATE TABLE Ratings ( DrinkName varchar(255), Stars varchar(255), Tags varchar(255));`;
+        const result = await sql`CREATE TABLE Ratings ( DrinkName varchar(255), Stars float8, Tags text[]);`;
         return NextResponse.json({ result }, {status: 200});
     } catch (error) {
         return NextResponse.json({ error }, {status:500});

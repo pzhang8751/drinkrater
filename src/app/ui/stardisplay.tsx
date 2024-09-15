@@ -1,7 +1,7 @@
 
 import { FaRegStar, FaStarHalfAlt, FaStar } from "react-icons/fa";
 
-export default function StarRating({ params }: {
+export default function StarDisplay({ params }: {
     params: {
         stars: number;
     }

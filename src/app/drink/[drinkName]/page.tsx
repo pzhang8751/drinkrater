@@ -4,7 +4,8 @@ import Link from 'next/link'
 import ReviewButton from '@/app/ui/reivewbutton';
 
 import { fetchDrinkData } from "@/lib/data";
-import StarRating from "@/app/ui/starrating";
+import StarDisplay from "@/app/ui/stardisplay";
+import TagDisplay from '@/app/ui/tagdisplay';
 
 /** Binary Search JSON Data, returns index of correct drink */
 let binarySearch = function (arr: any, drink: string, start: number, end: number) {
@@ -43,11 +44,33 @@ export default async function Page({params} : {
         averageStars = 0
     } else {
         let starRating = 0;
-        reviewData.map((data) => {
-            starRating += parseFloat(data['stars']);
+        reviewData.forEach((data) => {
+            starRating += data['stars'];
         })
         // rounding the average rating to the closest 0.5 
         averageStars = (Math.round(starRating / reviewData.length * 2) / 2)
+    }
+    // logic to determine which tags to include 
+    const tagCount : any = {} 
+    const tagsDisplay = []
+
+    if (reviewData.length > 0) {
+        drinkData.tags.forEach((tag) => {
+            tagCount[tag] = 0; 
+        })
+
+        reviewData.forEach((data) => {
+            console.log(Array.from(data['tags']))
+            data['tags'].forEach((tag:string) => {
+                tagCount[tag] = tagCount[tag] + 1
+            })
+        })
+
+        for (const key in tagCount) {
+            if (tagCount[key] / reviewData.length >= 0.75) {
+                tagsDisplay.push(key)
+            }
+        }
     }
     // console.log("review length " + reviewData);
     // console.log("Average Stars " + averageStars);
@@ -68,9 +91,12 @@ export default async function Page({params} : {
                         </h2>
                     </Link>
                 </div>
-                <StarRating params={{
+                <StarDisplay params={{
                     stars: averageStars
-                }} ></StarRating>
+                }} ></StarDisplay>
+                <TagDisplay params={{
+                    tags: tagsDisplay
+                }}></TagDisplay>
                 <ReviewButton params={{
                     name: drink.name
                 }}></ReviewButton>
