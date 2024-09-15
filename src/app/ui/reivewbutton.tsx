@@ -3,7 +3,7 @@
 import Popup from "reactjs-popup";
 import { RxCross1 } from "react-icons/rx";
 import { useState } from "react";
-import TagForm from "@/app/ui/tagform";
+import ReviewForm from "@/app/ui/reivewform";
 import { pixelify } from "./fonts";
 import drinkData from "@/app/drinkdata.json"
 
@@ -19,12 +19,15 @@ export default function ReviewButton({params} : {params:{name:string}}) {
     const [open, setOpen] = useState(false);
     const closeWindow = () => {
         setOpen(false)
+        setWarningMessage("")
         dispatch(updateStars(0))
         drinkData.tags.forEach((tag) => {
             dispatch(updateTag({id:tag, value:false}))
         })
     };
     const openWindow = () => setOpen(true);
+
+    const [warningMessage, setWarningMessage] = useState("")
 
     /** get tag states */
     const tags = useAppSelector((state) => state.tagReducer.items)
@@ -40,8 +43,6 @@ export default function ReviewButton({params} : {params:{name:string}}) {
     }
 
     async function submitReview() {
-        console.log("STARS " + stars)
-
         await fetch('/api/submit-review', {
             method: 'POST',
             body: JSON.stringify({
@@ -50,8 +51,13 @@ export default function ReviewButton({params} : {params:{name:string}}) {
                 "tags" : getTagData()
             }),
             next: {tags : ['review_' + params.name]}
+        }).then((responseJSON) => {
+            if (responseJSON["ok"]) {
+                closeWindow()
+            } else {
+                setWarningMessage("Select a star rating before submitting!")
+            }
         })
-        closeWindow()
     }
 
     function reviewWindow(drinkName: string) {
@@ -65,9 +71,10 @@ export default function ReviewButton({params} : {params:{name:string}}) {
                         <p className="mt-2 font-bold self-center text-lg sm:text-xl md:text-2xl">{drinkName}</p>
                         <hr className="w-5/6 my-1 border-black border-1 self-center" />
                         <div className="ml-2">
-                            {TagForm()}
+                            <ReviewForm />
                         </div>
                         <div className="flex-auto"></div>
+                        <p className="self-center text-red-500 mb-5">{warningMessage}</p>
                         <button onClick={submitReview} className={`${pixelify.className} w-32 mr-2 mb-2 place-self-end border-2 text-lg  border-black hover:border-red-500 hover:text-red-500 hover:font-bold`}>Submit</button>
                     </div>
                 </div>

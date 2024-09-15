@@ -3,7 +3,7 @@ import { sql } from '@vercel/postgres'
 
 export async function fetchDrinkData(drinkName : string) {
     try {
-        const data = await sql`SELECT stars, ratings FROM ratings WHERE drinkname=${drinkName};`;
+        const data = await sql`SELECT stars, tags FROM ratings WHERE drinkname=${drinkName};`;
         return data.rows;
     } catch (error) {
         console.log(error);

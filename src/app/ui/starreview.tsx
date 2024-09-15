@@ -88,7 +88,7 @@ export default function StarReview() {
     }
 
     return (
-        <div onMouseMove={onMouseDragHandler} onMouseUp={onMouseUpHandler} onMouseDown={onMouseDownHandler} onClick={onMouseClickHandler} onMouseLeave = {resetInfo} className="flex flex-row">
+        <div onMouseMove={onMouseDragHandler} onMouseUp={onMouseUpHandler} onMouseDown={onMouseDownHandler} onClick={onMouseClickHandler} onMouseLeave = {resetInfo} className="w-min flex flex-row hover:cursor-pointer">
             {starArray.map((star: any) => {
                 return star;
             })}
