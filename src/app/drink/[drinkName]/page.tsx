@@ -15,8 +15,12 @@ let binarySearch = function (arr: any, drink: string, start: number, end: number
 
     if (arr[mid].name === drink) return mid;
 
-    if (arr[mid].name[0] > drink[0]) return binarySearch(arr, drink, start, mid - 1);
-    else return binarySearch(arr, drink, mid + 1, end);
+    if (arr[mid].name.localeCompare(drink) > 0) {
+        return binarySearch(arr, drink, start, mid - 1);
+    } else {        
+        return binarySearch(arr, drink, mid + 1, end);
+
+    }
 }
 
 export const revalidate = 60; 
@@ -38,7 +42,7 @@ export default async function Page({params} : {
 }) {
     let drink = drinkData.drinks[binarySearch(drinkData.drinks, decodeURI(params.drinkName), 0, drinkData.drinks.length - 1)]; 
     const reviewData = await fetchDrinkData(drink.name);
-    // console.log(drink.name);
+
     let averageStars;
     // logic to determine the average star rating for the drink
     if (reviewData.length == 0) {
@@ -61,7 +65,7 @@ export default async function Page({params} : {
         })
 
         reviewData.forEach((data) => {
-            console.log(Array.from(data['tags']))
+            // console.log(Array.from(data['tags']))
             data['tags'].forEach((tag:string) => {
                 tagCount[tag] = tagCount[tag] + 1
             })
