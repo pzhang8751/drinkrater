@@ -8,12 +8,9 @@
     ],
     "types":[
         "alcohol",
-        "coffee",
         "energy",
         "juice",
-        "seltzer",
         "soda",
-        "tea",
         "water"
     ],
     "tags":[
