@@ -19,22 +19,52 @@
         "Romantic"
     ],
     "drinks":[
-        {
-            "brand": "Coca-Cola",
-            "name": "Coca-Cola",
-            "type": "soda"
-        },
-        {
-            "brand": "Deer Park",
-            "name": "Deer Park Natural Spring Water",
-            "type": "water"
-        },
-        {
-            "brand": "Fiji Water",
-            "name": "FIJI",
-            "type": "water"
-        }
-    ]
+    {
+        "brand": "Coca-Cola",
+        "name": "Coca-Cola",
+        "type": "soda"
+    },
+    {
+        "brand": "Coca-Cola",
+        "name": "Coca-Cola Spiced",
+        "type": "soda"
+    },
+    {
+        "brand": "Coca-Cola",
+        "name": "Coca-Cola Zero Sugar",
+        "type": "soda"
+    },
+    {
+        "brand": "Deer Park",
+        "name": "Deer Park Natural Spring Water",
+        "type": "water"
+    },
+    {
+        "brand": "Coca-Cola",
+        "name": "Diet Coke",
+        "type": "soda"
+    },
+    {
+        "brand": "Fiji Water",
+        "name": "FIJI",
+        "type": "water"
+    },
+    {
+        "brand": "Red Bull",
+        "name": "Red Bull Energy Drink",
+        "type": "energy"
+    },
+    {
+        "brand": "Coca-Cola",
+        "name": "Red Bull Sugarfree",
+        "type": "energy"
+    },
+    {
+        "brand": "Red Bull",
+        "name": "Red Bull Zero",
+        "type": "energy"
+    }
+]
     
 }
 
