@@ -1,5 +1,5 @@
 import drinkData from "@/app/drinkdata.json";
-import BrowseButton from "@/app/ui/browsebutton";
+import BrowseButton from "@/app/components/browsebutton";
 
 import type { Metadata } from "next";
 

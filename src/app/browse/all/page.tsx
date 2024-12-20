@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import drinkData from "@/app/drinkdata.json"
-import DrinkDisplayCard from "@/app/ui/drinkdisplaycard";
+import DrinkDisplayCard from "@/app/components/drinkdisplaycard";
 
 export const metadata: Metadata = {
     title: "Browse All Drinks",

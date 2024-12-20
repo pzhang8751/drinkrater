@@ -1,13 +1,8 @@
-import type { Metadata } from "next";
-import {noto} from '@/app/ui/fonts'
-import "./globals.css";
-import BrowseNav from "./ui/browsenav";
-import StoreProvider from "./StoreProvider";
 
-export const metadata: Metadata = {
-  title: "Welcome to Drinkrater",
-  description: "Find and rate your next favorite drink"
-};
+import {noto} from '@/app/components/fonts'
+import "./globals.css";
+import NavBar from "./components/navbar";
+import StoreProvider from "./StoreProvider";
 
 export default function RootLayout({
   children,
@@ -16,8 +11,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${noto.className}`}>
-        <BrowseNav/>
+      <body>
+        <NavBar/>
         <StoreProvider>{children}</StoreProvider>
       </body>
     </html>

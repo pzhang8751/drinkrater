@@ -1,12 +1,12 @@
 
 import drinkData from '@/app/drinkdata.json';
 import Link from 'next/link'
-import ReviewButton from '@/app/ui/reivewbutton';
+import ReviewButton from '@/app/components/reivewbutton';
 import Image from 'next/image';
 
 import { fetchDrinkData } from "@/lib/data";
-import StarDisplay from "@/app/ui/stardisplay";
-import TagDisplay from '@/app/ui/tagdisplay';
+import StarDisplay from "@/app/components/stardisplay";
+import TagDisplay from '@/app/components/tagdisplay';
 
 /** Binary Search JSON Data, returns index of correct drink */
 let binarySearch = function (arr: any, drink: string, start: number, end: number) {

@@ -1,7 +1,7 @@
 "use client"
 
 import Link from 'next/link'
-import {pixelify} from '@/app/ui/fonts'
+import {pixelify} from '@/app/components/fonts'
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx'
 

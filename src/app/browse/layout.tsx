@@ -1,6 +1,6 @@
 "use client";
 
-import BrowseButton from '@/app/ui/browsebutton'
+import BrowseButton from '@/app/components/browsebutton'
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx'
 
