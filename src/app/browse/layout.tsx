@@ -9,8 +9,8 @@ export default function Layout({children}: {children:React.ReactNode}) {
 
     return (
         <main>
-            <div className={clsx("mt-10 flex flex-col items-center gap-y-10",{"hidden":!pathName.endsWith("/brand")&&!pathName.endsWith("/type")&&!pathName.endsWith("/all")})}>
-                <h1 className="font-bold text-3xl sm:text-4xl md:text-5xl">
+            <section className={clsx("p-16 flex flex-col items-center gap-y-5",{"hidden":!pathName.endsWith("/brand")&&!pathName.endsWith("/type")&&!pathName.endsWith("/all")})}>
+                <h1 className="py-4 font-bold text-3xl sm:text-4xl md:text-5xl">
                     Browse Drinks By
                 </h1>
                 <div className="flex justify-center space-x-12 md:space-x-32">
@@ -18,11 +18,9 @@ export default function Layout({children}: {children:React.ReactNode}) {
                     <BrowseButton pathName="/browse/brand" buttonName="Brand"/>
                     <BrowseButton pathName="/browse/all" buttonName="All"/>
                 </div>
-                <hr className="w-[calc(100vw-12rem)] border-black border-1"/>
-            </div>
+                <hr className="w-[90%] border-black border-1"/>
+            </section>
             {children}
-            <div className='h-12'></div>
         </main>
- 
     );
 }

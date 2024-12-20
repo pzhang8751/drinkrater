@@ -37,13 +37,13 @@ export default function Page({params}:{
 }) {
     return (
         <main>
-            <div className="flex flex-col items-center">
-                <h1 className="mt-10 font-bold text-3xl sm:text-4xl md:text-5xl">{decodeURI(params.identifier[0].toUpperCase()+params.identifier.slice(1))}</h1>
-                <hr className="mt-10 w-[calc(100vw-12rem)] border-black border-1"/>
-            </div>
-            <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 place-items-center gap-y-6">
+            <section className="pt-16 flex flex-col items-center *:mt-4">
+                <h1 className="font-bold text-3xl sm:text-4xl md:text-5xl">{decodeURI(params.identifier[0].toUpperCase()+params.identifier.slice(1))}</h1>
+                <hr className="w-[90%] border-black border-1"/>
+            </section>
+            <section className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 place-items-center gap-y-6">
                 {createButtons(params.category, decodeURI(params.identifier))}
-            </div>
+            </section>
         </main>
     );
 }
