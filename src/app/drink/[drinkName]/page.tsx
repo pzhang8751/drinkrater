@@ -81,7 +81,8 @@ export default async function Page({params} : {
     // console.log("Average Stars " + averageStars);
 
     return (
-        <main className="mt-10 grid grid-cols-1 sm:grid-cols-2 px-16 gap-y-5 gap-x-5">
+        <main>
+            <section className="pt-24 pb-10 grid grid-cols-1 sm:grid-cols-2 px-16 gap-y-5 gap-x-5">
             <div className="h-72 sm:h-96 md:h-128 border border-black relative">
                 <Image fill={true} style={{objectFit:'contain'}} src={'/drinkImages/' + drink.name + '.jpg'} alt={"Image of " + drink.name}/> 
             </div>
@@ -106,7 +107,9 @@ export default async function Page({params} : {
                     name: drink.name
                 }}></ReviewButton>
             </div>
-            <div className="h-20 col-span-1 sm:col-span-2"></div>
+            {/* <div className="h-20 col-span-1 sm:col-span-2"></div> */}
+            </section>
+            
             
         </main>
     );

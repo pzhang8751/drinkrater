@@ -1,29 +1,34 @@
 "use client"
-import { RxCross1 } from "react-icons/rx";
+
 import { useState } from "react";
-import ReviewForm from "@/app/components/reivewform";
 import { pixelify } from "./fonts";
 import drinkData from "@/app/drinkdata.json"
-
+import StarReview from "./starreview";
 import { useAppSelector } from "@/lib/store";
 import { updateStars } from "@/lib/features/starSlice";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/lib/store";
 import { updateTag } from "@/lib/features/tagSlice";
 
-export default function ReviewButton({params} : {params:{name:string}}) {
+interface PopUp {
+    name: string
+    action: () => void
+    isOpen: boolean
+}
+
+export default function ReviewButton({ params }: { params: { name: string } }) {
     const dispatch = useDispatch<AppDispatch>()
     /** window open / close */
     const [open, setOpen] = useState(false);
+
     const closeWindow = () => {
         setOpen(false)
         setWarningMessage("")
         dispatch(updateStars(0))
         drinkData.tags.forEach((tag) => {
-            dispatch(updateTag({id:tag, value:false}))
+            dispatch(updateTag({ id: tag, value: false }))
         })
     };
-    const openWindow = () => setOpen(true);
 
     const [warningMessage, setWarningMessage] = useState("")
 
@@ -32,7 +37,7 @@ export default function ReviewButton({params} : {params:{name:string}}) {
     const stars = useAppSelector((state) => state.starReducer).stars
 
     function getTagData() {
-        return Object.keys(tags).map((id)=> {
+        return Object.keys(tags).map((id) => {
             const tag = tags[id]
             if (tag.isSelected) {
                 return (id)
@@ -44,11 +49,11 @@ export default function ReviewButton({params} : {params:{name:string}}) {
         await fetch('/api/submit-review', {
             method: 'POST',
             body: JSON.stringify({
-                "name" : params.name, 
-                "stars" : stars,
-                "tags" : getTagData()
+                "name": params.name,
+                "stars": stars,
+                "tags": getTagData()
             }),
-            next: {tags : ['review_' + params.name]}
+            next: { tags: ['review_' + params.name] }
         }).then((responseJSON) => {
             if (responseJSON["ok"]) {
                 closeWindow()
@@ -58,32 +63,40 @@ export default function ReviewButton({params} : {params:{name:string}}) {
         })
     }
 
-    // function reviewWindow(drinkName: string) {
-    //     return (
-    //         <Popup  open={open}>
-    //             <div className="h-screen w-screen bg-black bg-opacity-50 grid justify-center">
-    //                 <div className="h-3/4 w-72 sm:w-128 md:w-160 bg-white self-center rounded-lg flex flex-col overflow-y-auto">
-    //                     <div className="mt-1 ml-1">
-    //                         <RxCross1 onClick={closeWindow} className="hover:text-red-500 hover:cursor-pointer" size="20" />
-    //                     </div>
-    //                     <p className="mt-2 font-bold self-center text-lg sm:text-xl md:text-2xl">{drinkName}</p>
-    //                     <hr className="w-5/6 my-1 border-black border-1 self-center" />
-    //                     <div className="ml-2">
-    //                         <ReviewForm />
-    //                     </div>
-    //                     <div className="flex-auto"></div>
-    //                     <p className="self-center text-red-500 mb-5">{warningMessage}</p>
-    //                     <button onClick={submitReview} className={`${pixelify.className} w-32 mr-2 mb-2 place-self-end border-2 text-lg  border-black hover:border-red-500 hover:text-red-500 hover:font-bold`}>Submit</button>
-    //                 </div>
-    //             </div>
-    //         </Popup>
-    //     );
-    // }
-
     return (
         <>
-            <button type="button" onClick={openWindow} className={`${pixelify.className} w-32 border-2 border-black hover:border-red-500 hover:text-red-500 hover:font-bold`}>Review</button>
+            <button type="button" onClick={()=>setOpen(true)} className={`${pixelify.className} w-32 border-2 border-black hover:border-red-500 hover:text-red-500 hover:font-bold`}>Review</button>
+            <ReviewForm name={params.name} action={closeWindow} isOpen={open}></ReviewForm>
         </>
-        
+
     );
+}
+
+function ReviewForm({name, action, isOpen} : PopUp) {
+    return (
+        <div className={(isOpen ? "" : "hidden")}>
+            <div className="h-screen w-screen bg-black opacity-50 fixed top-0 left-0 z-30" onClick={action}>
+            </div>
+            <section className="w-[80%] px-3 py-2 bg-white fixed top-[7%] left-[10%] z-40 space-y-2">
+                <div className="flex">
+                    <h2 className="flex-grow font-semibold text-lg">Review {name} Drink</h2>
+                    <button className="font-semibold hover:text-red-500 justify-self-end" onClick={action}>X</button>
+                </div>
+                <hr className="border-black"></hr>
+                <form className="px-5 space-y-2 *:block">
+                    <label className="">Rating</label>
+                    {/* <StarReview></StarReview> */}
+                    <textarea rows={10} className="px-1 w-full border-2 resize-none" placeholder="Add review..."></textarea>
+                    <button className="px-5 py-2 rounded-full bg-orange-200 hover:bg-orange-400 hover:scale-90 transition-all duration-300 ease-in-out place-self-end" type="submit">Submit</button>
+                </form>
+            </section>
+        </div>
+    )
+}
+
+function StarRating() {
+    return (
+        <>
+        </>
+    )
 }
