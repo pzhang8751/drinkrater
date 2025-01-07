@@ -28,7 +28,7 @@ export default function NavBar() {
             <nav className="pl-[2%] pr-[5%] h-16 w-screen fixed flex items-center gap-x-4 bg-white border-black border-b-2 text-xl sm:text-2xl z-20">
                 <Link href="/" className="h-min outline px-2 py-0.5 ml-4">Drink<span className="italic">rater</span></Link>
                 <div className="flex-grow"></div>
-                <Link id="browse" href="/browse/type" className={clsx("hover:font-bold hover:text-red-500", { "text-red-500": pathName.includes("/browse") })} onMouseEnter={()=>setDropdown(true)} onClick={()=>setDropdown(false)}>BROWSE</Link>
+                <Link id="browse" href="/browse/type" className={clsx("hover:scale-90 hover:font-bold hover:text-red-500", { "text-red-500": pathName.includes("/browse") })} onMouseEnter={()=>setDropdown(true)} onClick={()=>setDropdown(false)}>BROWSE</Link>
             </nav>
             <DropDown open={()=> setDropdown(true)} close={() => setDropdown(false)} isOpen={openDropdown}></DropDown>
         </>
@@ -62,7 +62,7 @@ function links({category, action} : SearchLinks) {
 
 function DropDown({ open, close, isOpen }: Menu) {
     return (
-        <div className={"px-5 w-screen bg-blue-100 z-10 fixed flex flex-row space-x-5 transition-all ease-in-out overflow-hidden " + (isOpen? "translate-y-16":"-translate-y-40")} onMouseOver={open} onMouseLeave={close}>
+        <div className={"px-5 w-screen bg-blue-100 border-b-[1px] border-black z-10 fixed flex flex-row space-x-5 transition-all ease-in-out overflow-hidden " + (isOpen? "translate-y-16":"-translate-y-44")} onMouseOver={open} onMouseLeave={close}>
             <section className="flex flex-col gap-y-2">
                 <h2 className="mt-1 font-bold">Types</h2>
                 {links({category: "type", action: close})}

@@ -14,6 +14,7 @@ export async function POST(req: NextRequest) {
   const name = data["name"];
   const stars = data["stars"];
   const tags = data["tags"];
+  const comment = data["comment"];
 
   try {
     if (!name) {
@@ -22,8 +23,7 @@ export async function POST(req: NextRequest) {
     if (stars <= 0) {
       throw new Error("Please pick a star rating!")
     }
-    await sql`INSERT INTO ratings VALUES (${name}, ${stars}, ${tags});`;
-    revalidateTag('review_' + data["name"])
+    await sql`INSERT INTO ratings VALUES (${name}, ${stars}, ${tags}, ${comment});`;
   } catch (error) {
     return NextResponse.json({ error }, { status: 500 });
   }
