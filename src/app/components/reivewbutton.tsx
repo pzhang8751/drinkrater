@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useRef, memo } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { pixelify } from "./fonts";
 import drinkData from "@/app/drinkdata.json"
 import { RiStarFill, RiStarHalfFill, RiStarLine } from "react-icons/ri"
@@ -126,7 +126,12 @@ function StarRating({stars, action} : Rating) {
 
     const starArray: any = []
     const size = 40
-    const starElements = Array.from(document.getElementsByName("starReview"))
+    let starElements : any[]; 
+
+    useEffect(()=> {
+        starElements = Array.from(document.getElementsByName("starReview"))
+    })
+    
 
     /** Using a loop to determine how filled in the next star should be */
     for (let i = 5, STARS = stars; i > 0; i--, STARS--) {
