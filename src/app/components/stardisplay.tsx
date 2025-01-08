@@ -1,30 +1,43 @@
+"use client"
+import { useEffect } from "react";
+import ReviewButton from "./reivewbutton";
+import { RiStarFill, RiStarHalfFill, RiStarLine } from "react-icons/ri"
+import { fetchStarData } from "@/lib/data";
 
-import { FaRegStar, FaStarHalfAlt, FaStar } from "react-icons/fa";
+export const dynamic = 'force-dynamic';
 
-export default function StarDisplay({ params }: {
+export default async function StarDisplay({ params }: {
     params: {
-        stars: number;
+        name: string;
     }
 }) {
-    const size = "20"; 
-    const starArray: any = [];
+    const size = "20";
+
+    let starArray: any = [];
     
+    let starData: any = await fetchStarData(params.name)
     /** Using a loop to determine how filled in the next star should be */
-    for (let i = 5; i > 0; i--, params.stars--) {
-        if (params.stars >= 1) {
-            starArray.push(<FaStar key={"stars_" + params.stars} size={size}></FaStar>)
-        } else if (params.stars > 0) {
-            starArray.push(<FaStarHalfAlt key={"stars_" + params.stars} size={size}></FaStarHalfAlt>)
+    for (let i = 5; i > 0; i--, starData--) {
+        if (starData >= 1) {
+            starArray.push(<RiStarFill key={"stars_" + starData} size={size} />)
+        } else if (starData > 0) {
+            starArray.push(<RiStarHalfFill key={"stars_" + starData} size={size} />)
         } else {
-            starArray.push(<FaRegStar key={"stars_" + params.stars} size={size}></FaRegStar>)
+            starArray.push(<RiStarLine key={"stars_" + starData} size={size} />)
         }
     }
+    // useEffect(() => {
+
+    // }, []);
 
     return (
-        <div className="flex flex-row">
-            {starArray.map((star: any) => {
-                return star;
-            })}
-        </div>
+        <>
+            <div className="flex flex-row">
+                {starArray.map((star: any) => {
+                    return star;
+                })}
+            </div>
+        </>
+
     )
 }

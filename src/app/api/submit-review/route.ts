@@ -1,7 +1,6 @@
 'use server'
 
 import { sql } from '@vercel/postgres';
-import { revalidateTag } from 'next/cache';
 import { NextRequest, NextResponse } from 'next/server';
 
 // console.log({
@@ -24,9 +23,11 @@ export async function POST(req: NextRequest) {
       throw new Error("Please pick a star rating!")
     }
     await sql`INSERT INTO ratings VALUES (${name}, ${stars}, ${tags}, ${comment});`;
+    await sql`INSERT INTO total_stars (drinkname, stars) VALUES (${name}, ${stars}) ON CONFLICT (drinkname) DO UPDATE SET stars=${stars}+total_stars.stars`
   } catch (error) {
     return NextResponse.json({ error }, { status: 500 });
   }
+  
   const drink = await sql`SELECT * FROM Ratings;`;
   return NextResponse.json({ drink }, { status: 200 });
 }

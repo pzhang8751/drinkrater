@@ -1,10 +1,9 @@
-
 import drinkData from '@/app/drinkdata.json';
 import Link from 'next/link'
 import ReviewButton from '@/app/components/reivewbutton';
 import Image from 'next/image';
 
-import { fetchDrinkData } from "@/lib/data";
+// import { fetchDrinkData } from "@/lib/data";
 import StarDisplay from "@/app/components/stardisplay";
 import TagDisplay from '@/app/components/tagdisplay';
 
@@ -23,8 +22,6 @@ let binarySearch = function (arr: any, drink: string, start: number, end: number
     }
 }
 
-export const revalidate = 60; 
-
 export const dynamicParams = true
 
 export async function generateStaticParams() {
@@ -41,42 +38,29 @@ export default async function Page({params} : {
     }
 }) {
     let drink = drinkData.drinks[binarySearch(drinkData.drinks, decodeURI(params.drinkName), 0, drinkData.drinks.length - 1)]; 
-    const reviewData = await fetchDrinkData(drink.name);
 
-    let averageStars;
-    // logic to determine the average star rating for the drink
-    if (reviewData.length == 0) {
-        averageStars = 0
-    } else {
-        let starRating = 0;
-        reviewData.forEach((data) => {
-            starRating += data['stars'];
-        })
-        // rounding the average rating to the closest 0.5 
-        averageStars = (Math.round(starRating / reviewData.length * 2) / 2)
-    }
     // logic to determine which tags to include 
-    const tagCount : any = {} 
-    const tagsDisplay = []
+    // const tagCount : any = {} 
+    // const tagsDisplay = []
 
-    if (reviewData.length > 0) {
-        drinkData.tags.forEach((tag) => {
-            tagCount[tag] = 0; 
-        })
+    // if (reviewData.length > 0) {
+    //     drinkData.tags.forEach((tag) => {
+    //         tagCount[tag] = 0; 
+    //     })
 
-        reviewData.forEach((data) => {
-            // console.log(Array.from(data['tags']))
-            data['tags'].forEach((tag:string) => {
-                tagCount[tag] = tagCount[tag] + 1
-            })
-        })
+    //     reviewData.forEach((data) => {
+    //         // console.log(Array.from(data['tags']))
+    //         data['tags'].forEach((tag:string) => {
+    //             tagCount[tag] = tagCount[tag] + 1
+    //         })
+    //     })
 
-        for (const key in tagCount) {
-            if (tagCount[key] / reviewData.length >= 0.75) {
-                tagsDisplay.push(key)
-            }
-        }
-    }
+    //     for (const key in tagCount) {
+    //         if (tagCount[key] / reviewData.length >= 0.75) {
+    //             tagsDisplay.push(key)
+    //         }
+    //     }
+    // }
     // console.log("review length " + reviewData);
     // console.log("Average Stars " + averageStars);
 
@@ -98,14 +82,13 @@ export default async function Page({params} : {
                     </Link>
                 </div>
                 <StarDisplay params={{
-                    stars: averageStars
-                }} ></StarDisplay>
-                <TagDisplay params={{
-                    tags: tagsDisplay
-                }}></TagDisplay>
-                <ReviewButton params={{
                     name: drink.name
-                }}></ReviewButton>
+                }} ></StarDisplay>
+                {/* <TagDisplay params={{
+                    tags: tagsDisplay
+                }}></TagDisplay> */}
+                <ReviewButton name={drink.name}></ReviewButton>
+                
             </div>
             {/* <div className="h-20 col-span-1 sm:col-span-2"></div> */}
             </section>
