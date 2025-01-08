@@ -1,4 +1,4 @@
-"use client"
+// "use client"
 import { useEffect } from "react";
 import ReviewButton from "./reivewbutton";
 import { RiStarFill, RiStarHalfFill, RiStarLine } from "react-icons/ri"
@@ -14,7 +14,7 @@ export default async function StarDisplay({ params }: {
     const size = "20";
 
     let starArray: any = [];
-    
+
     let starData: any = await fetchStarData(params.name)
     /** Using a loop to determine how filled in the next star should be */
     for (let i = 5; i > 0; i--, starData--) {
