@@ -48,8 +48,10 @@ export default async function Page({params} : {
         drinkName : string
     }
 }) {
+    const name = decodeURI(params.drinkName) 
     const data : DrinkData = drinkData;
-    const drink = data.drinks[params.drinkName]; 
+    const drink = data.drinks[name]; 
+    console.log(drink)
     // let drink = drinkData.drinks[binarySearch(drinkData.drinks, decodeURI(params.drinkName), 0, drinkData.drinks.length - 1)]; 
 
     // logic to determine which tags to include 
@@ -81,12 +83,12 @@ export default async function Page({params} : {
         <main>
             <section className="pt-24 pb-10 grid grid-cols-1 sm:grid-cols-2 px-16 gap-y-5 gap-x-5">
             <div className="h-72 sm:h-96 md:h-128 border border-black relative">
-                <Image fill={true} style={{objectFit:'contain'}} src={'/drinkImages/' + params.drinkName + '.jpg'} alt={"Image of " + params.drinkName}/> 
+                <Image fill={true} style={{objectFit:'contain'}} src={'/drinkImages/' + name + '.jpg'} alt={"Image of " + name}/> 
             </div>
             <div className="flex flex-col gap-y-3">
                 <div>
                     <h1 className="font-bold text-2xl sm:text-5xl ">
-                        {params.drinkName}
+                        {name}
                     </h1>
                     <Link href={"/browse/brand/" + drink.brand}>
                         <h2 className="mt-1 text-xl sm:text-3xl">
@@ -95,12 +97,12 @@ export default async function Page({params} : {
                     </Link>
                 </div>
                 <StarDisplay params={{
-                    name: params.drinkName
+                    name: name
                 }} ></StarDisplay>
                 {/* <TagDisplay params={{
                     tags: tagsDisplay
                 }}></TagDisplay> */}
-                <ReviewButton name={params.drinkName}></ReviewButton>
+                <ReviewButton name={name}></ReviewButton>
                 
             </div>
             {/* <div className="h-20 col-span-1 sm:col-span-2"></div> */}
