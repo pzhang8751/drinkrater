@@ -8,30 +8,37 @@ export const metadata: Metadata = {
     description: "Search all drinks"
 };
 
-function createButtons(category: string, identifier: string) {
+interface Drink {
+    brand : string
+    type : string
+}
+
+interface DrinkData {
+    drinks : {
+        [key : string] : Drink
+    }
+}
+
+function createButtons(identifier: string) {
+    let data : DrinkData = drinkData
+
     return (
         <>
-            {drinkData.drinks.filter((drink) => {
-                let id = drink.brand
-                if (category==="type") id = drink.type; 
-                if (id === identifier) return drink; 
-            }).map((drink) => {
-                let description = drink.brand
-                if (category==="brand") description = drink.type;
-                return (
-                    <DrinkDisplayCard key={"display_card_"+drink.name} params={{
-                        drinkName: drink.name,
-                        subText: description
-                    }}/>
-                );
-            })}
+            {Object.keys(data.drinks).reduce<JSX.Element[]>((array, drink) => {
+                if (data.drinks[drink].type === identifier) {
+                    let description = data.drinks[drink].brand
+                    const card = <DrinkDisplayCard key={"display_" + drink} params={{drinkName: drink, subText: description}}></DrinkDisplayCard>
+                    array.push(card)
+                }
+                
+                return array; 
+            }, [])}
         </>
     );
 }
 
 export default function Page({params}:{
     params:{
-        category:string,
         identifier:string
     }
 }) {
@@ -42,7 +49,7 @@ export default function Page({params}:{
                 <hr className="w-[90%] border-black border-1"/>
             </section>
             <section className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 place-items-center gap-y-6">
-                {createButtons(params.category, decodeURI(params.identifier))}
+                {createButtons(decodeURI(params.identifier))}
             </section>
         </main>
     );

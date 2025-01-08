@@ -6,63 +6,48 @@
         "Red Bull",
         "Simply"
     ],
-    "drinks": [
-        {
+    "drinks": {
+        "Coca-Cola" : {
             "brand": "Coca-Cola",
-            "name": "Coca-Cola",
             "type": "soda"
         },
-        {
+        "Coca-Cola Spiced" : {
             "brand": "Coca-Cola",
-            "name": "Coca-Cola Spiced",
             "type": "soda"
         },
-        {
+        "Coca-Cola Zero Sugar" : {
             "brand": "Coca-Cola",
-            "name": "Coca-Cola Zero Sugar",
             "type": "soda"
         },
-        {
+        "Deer Park Natural Spring Water" : {
             "brand": "Deer Park",
-            "name": "Deer Park Natural Spring Water",
             "type": "water"
         },
-        {
-            "brand": "Coca-Cola",
-            "name": "Diet Coke",
-            "type": "soda"
-        },
-        {
-            "brand": "Fiji Water",
-            "name": "FIJI",
+        "Fiji Water" : {
+            "brand": "FIJI",
             "type": "water"
         },
-        {
+        "Red Bull Energy Drink" : {
             "brand": "Red Bull",
-            "name": "Red Bull Energy Drink",
             "type": "energy"
         },
-        {
+        "Red Bull Sugarfree" : {
             "brand": "Red Bull",
-            "name": "Red Bull Sugarfree",
             "type": "energy"
         },
-        {
+        "Red Bull Zero" : {
             "brand": "Red Bull",
-            "name": "Red Bull Zero",
             "type": "energy"
         },
-        {
+        "Simply Lemonade" : {
             "brand": "Simply",
-            "name": "Simply Lemonade",
             "type": "juice"
         },
-        {
+        "Simply Orange Juice" : {
             "brand": "Simply",
-            "name": "Simply Orange Juice",
             "type": "juice"
         }
-    ],
+    },
     "tags": [
         "Parties",
         "Romantic",

@@ -7,14 +7,27 @@ export const metadata: Metadata = {
     description: "Search all drinks"
 };
 
+interface Drink {
+    brand : string
+    type : string
+}
+
+interface DrinkData {
+    drinks : {
+        [key : string] : Drink
+    }
+}
+
 function createButtons() {
+    let data : DrinkData = drinkData
+
     return (
         <>
-            {drinkData.drinks.map((drink) => {
+            {Object.keys(data.drinks).map((drink) => {
                 return (
-                    <DrinkDisplayCard key={"display_card_"+drink.name} params={{
-                        drinkName: drink.name,
-                        subText: drink.brand
+                    <DrinkDisplayCard key={"display_"+drink} params={{
+                        drinkName: drink,
+                        subText: data.drinks[drink].brand
                     }}/>
                 );
             })}
