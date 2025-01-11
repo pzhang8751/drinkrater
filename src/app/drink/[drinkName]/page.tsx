@@ -2,10 +2,12 @@ import drinkData from '@/app/drinkdata.json';
 import Link from 'next/link'
 import ReviewButton from '@/app/components/reivewbutton';
 import Image from 'next/image';
+// import { useState, useEffect } from 'react';
 
 // import { fetchDrinkData } from "@/lib/data";
 import StarDisplay from "@/app/components/stardisplay";
 import TagDisplay from '@/app/components/tagdisplay';
+import { fetchStarData } from '@/lib/data';
 
 /** Binary Search JSON Data, returns index of correct drink */
 // let binarySearch = function (arr: any, drink: string, start: number, end: number) {
@@ -24,12 +26,25 @@ import TagDisplay from '@/app/components/tagdisplay';
 
 // export const dynamicParams = true
 
-// export async function generateStaticParams() {
-//     let drinks = drinkData.drinks.map((drink) => ({
-//         drinkName : drink.name
-//     }))
-//     // console.log(drinks)
-//     return drinks
+// export const revalidate = 10
+
+export async function generateStaticParams() {
+    let drinks = Object.keys(drinkData.drinks).map((name) => ({
+        params:{drinkName : encodeURIComponent(name)}
+    }))
+    // console.log(drinks)
+    return drinks
+}
+
+// export async function generateStaticParams({params} : {
+//     params: {
+//         drinkName: string
+//     }
+// }) {
+//     const data = await fetchStarData(decodeURI(params.drinkName))
+//     return {
+//         params: { drinkName: decodeURI(params.drinkName), averageStars: data  },
+//     }
 // }
 
 interface Drink {
@@ -43,16 +58,18 @@ interface DrinkData {
     }
 }
 
-export default async function Page({params} : {
+interface PageProps {
     params: {
-        drinkName : string
+        drinkName: string
+        // averageStars: number
     }
-}) {
-    const name = decodeURI(params.drinkName) 
+}
+
+export default async function Page({params} : PageProps) {
+    const name = decodeURI(params.drinkName)
     const data : DrinkData = drinkData;
     const drink = data.drinks[name]; 
-    console.log(drink)
-    // let drink = drinkData.drinks[binarySearch(drinkData.drinks, decodeURI(params.drinkName), 0, drinkData.drinks.length - 1)]; 
+    console.log(params.drinkName)
 
     // logic to determine which tags to include 
     // const tagCount : any = {} 

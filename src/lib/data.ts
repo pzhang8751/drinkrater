@@ -1,15 +1,4 @@
-
 import { sql } from '@vercel/postgres'
-
-// export async function fetchDrinkData(drinkName : string) {
-//     try {
-//         const data = await sql`SELECT stars, tags FROM ratings WHERE drinkname=${drinkName};`;
-//         return data.rows;
-//     } catch (error) {
-//         console.log(error);
-//         throw new Error('Failed to fetch drink data for ' + drinkName)
-//     }
-// }
 
 export async function fetchStarData(drinkName: string) {
     try {
@@ -26,6 +15,6 @@ export async function fetchStarData(drinkName: string) {
         return stars / total;
     } catch (error) {
         console.log(error);
-        throw new Error('Failed to fetch drink data for ' + drinkName)
+        // throw new Error('Failed to fetcnh drink data for ' + drinkName)
     }
 }

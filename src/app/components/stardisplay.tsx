@@ -1,43 +1,60 @@
-// "use client"
-import { useEffect } from "react";
-import ReviewButton from "./reivewbutton";
+"use client"
+
+import { useState, useEffect } from "react";
 import { RiStarFill, RiStarHalfFill, RiStarLine } from "react-icons/ri"
 import { fetchStarData } from "@/lib/data";
 
-export const dynamic = 'force-dynamic';
-
-export default async function StarDisplay({ params }: {
+export default function StarDisplay({ params }: {
     params: {
         name: string;
     }
 }) {
+
     const size = "20";
 
-    let starArray: any = [];
+    const [averageStars, setAverageStars] = useState(0)
+    const [starArray, setStarArray] = useState<JSX.Element[]>([]);
 
-    let starData: any = await fetchStarData(params.name)
-    /** Using a loop to determine how filled in the next star should be */
-    for (let i = 5; i > 0; i--, starData--) {
-        if (starData >= 1) {
-            starArray.push(<RiStarFill key={"stars_" + starData} size={size} />)
-        } else if (starData > 0) {
-            starArray.push(<RiStarHalfFill key={"stars_" + starData} size={size} />)
+    const fetchData = async () => {
+        const data = await fetchStarData(params.name)
+        console.log(data + " DATA")
+        if (data===undefined) {
+            setAverageStars(0)
         } else {
-            starArray.push(<RiStarLine key={"stars_" + starData} size={size} />)
+            setAverageStars(data)
         }
     }
-    // useEffect(() => {
+    useEffect(() => {
+        fetchData()
 
-    // }, []);
+        const intervalID = setInterval(fetchData, 10000)
+
+        return () => clearInterval(intervalID)
+    }, [])
+
+    useEffect(() => {
+        const newStarArray: JSX.Element[] = [];
+
+        let starData = averageStars
+        /** Using a loop to determine how filled in the next star should be */
+        for (let i = 5; i > 0; i--, starData--) {
+            if (starData >= 1) {
+                newStarArray.push(<RiStarFill key={"stars_" + starData} size={size} />)
+            } else if (starData > 0) {
+                newStarArray.push(<RiStarHalfFill key={"stars_" + starData} size={size} />)
+            } else {
+                newStarArray.push(<RiStarLine key={"stars_" + starData} size={size} />)
+            }
+        }
+
+        setStarArray(newStarArray)
+    }, [averageStars])
 
     return (
         <>
             <div className="flex flex-row">
-                {starArray.map((star: any) => {
-                    return star;
-                })}
+                {starArray}
             </div>
         </>
-
     )
 }
