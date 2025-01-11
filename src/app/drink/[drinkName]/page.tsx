@@ -2,7 +2,7 @@ import drinkData from '@/app/drinkdata.json';
 import Link from 'next/link'
 import ReviewButton from '@/app/components/reivewbutton';
 import Image from 'next/image';
-// import { useState, useEffect } from 'react';
+import ReviewContainer from '@/app/components/reviewcontainer';
 
 // import { fetchDrinkData } from "@/lib/data";
 import StarDisplay from "@/app/components/stardisplay";
@@ -30,7 +30,7 @@ import { fetchStarData } from '@/lib/data';
 
 export async function generateStaticParams() {
     let drinks = Object.keys(drinkData.drinks).map((name) => ({
-        params:{drinkName : encodeURIComponent(name)}
+        params: { drinkName: encodeURIComponent(name) }
     }))
     // console.log(drinks)
     return drinks
@@ -48,13 +48,13 @@ export async function generateStaticParams() {
 // }
 
 interface Drink {
-    brand : string
-    type : string
+    brand: string
+    type: string
 }
 
 interface DrinkData {
-    drinks : {
-        [key : string] : Drink
+    drinks: {
+        [key: string]: Drink
     }
 }
 
@@ -65,10 +65,10 @@ interface PageProps {
     }
 }
 
-export default async function Page({params} : PageProps) {
+export default async function Page({ params }: PageProps) {
     const name = decodeURI(params.drinkName)
-    const data : DrinkData = drinkData;
-    const drink = data.drinks[name]; 
+    const data: DrinkData = drinkData;
+    const drink = data.drinks[name];
     console.log(params.drinkName)
 
     // logic to determine which tags to include 
@@ -98,34 +98,43 @@ export default async function Page({params} : PageProps) {
 
     return (
         <main>
-            <section className="pt-24 pb-10 grid grid-cols-1 sm:grid-cols-2 px-16 gap-y-5 gap-x-5">
-            <div className="h-72 sm:h-96 md:h-128 border border-black relative">
-                <Image fill={true} style={{objectFit:'contain'}} src={'/drinkImages/' + name + '.jpg'} alt={"Image of " + name}/> 
-            </div>
-            <div className="flex flex-col gap-y-3">
-                <div>
-                    <h1 className="font-bold text-2xl sm:text-5xl ">
-                        {name}
-                    </h1>
-                    <Link href={"/browse/brand/" + drink.brand}>
-                        <h2 className="mt-1 text-xl sm:text-3xl">
-                            {drink.brand}
-                        </h2>
-                    </Link>
+            {/* <section className="pt-24 pb-10 grid grid-cols-1 sm:grid-cols-2 px-16 gap-y-5 gap-x-5">
+                <div className="h-72 sm:h-96 md:h-128 border border-black relative">
+                    <Image fill={true} style={{ objectFit: 'contain' }} src={'/drinkImages/' + name + '.jpg'} alt={"Image of " + name} />
                 </div>
-                <StarDisplay params={{
-                    name: name
-                }} ></StarDisplay>
-                {/* <TagDisplay params={{
-                    tags: tagsDisplay
-                }}></TagDisplay> */}
-                <ReviewButton name={name}></ReviewButton>
-                
-            </div>
-            {/* <div className="h-20 col-span-1 sm:col-span-2"></div> */}
+                <div className="flex flex-col gap-y-3">
+                    <div>
+                        <h1 className="font-bold text-2xl sm:text-5xl ">
+                            {name}
+                        </h1>
+                        <Link href={"/browse/brand/" + drink.brand}>
+                            <h2 className="mt-1 text-xl sm:text-3xl">
+                                {drink.brand}
+                            </h2>
+                        </Link>
+                    </div>
+                    <StarDisplay params={{
+                        name: name
+                    }} ></StarDisplay>
+                    <ReviewButton name={name}></ReviewButton>
+                </div>
+            </section> */}
+            <section className="pt-24 pb-10 px-[5%]">
+                <div className="mr-10 h-72 w-[45%] sm:h-96 md:h-128 border border-black relative float-left">
+                    <Image fill={true} style={{ objectFit: 'contain' }} src={'/drinkImages/' + name + '.jpg'} alt={"Image of " + name} />
+                </div>
+                <h1 className="font-bold text-2xl sm:text-5xl">
+                    {name}
+                </h1>
+                <Link href={"/browse/brand/" + drink.brand}>
+                    <h2 className="mt-1 text-xl sm:text-3xl">
+                        {drink.brand}
+                    </h2>
+                </Link>
+                <ReviewContainer name={name}></ReviewContainer>
+
             </section>
-            
-            
+
         </main>
     );
 }

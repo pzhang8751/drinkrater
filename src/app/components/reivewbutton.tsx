@@ -11,14 +11,14 @@ import { updateTag } from "@/lib/features/tagSlice";
 
 interface Button {
     name : string
-    // action : (value:boolean) => void
+    action : () => void
 }
 
 interface PopUp {
     name: string
     action: () => void
     isOpen: boolean
-    // onSubmit: (value:boolean) => void
+    onSubmit: () => void
 }
 
 interface Rating {
@@ -26,7 +26,7 @@ interface Rating {
     action: (value: number) => void
 }
 
-export default function ReviewButton({name /**, action */} : Button) {
+export default function ReviewButton({name, action} : Button) {
     // const dispatch = useDispatch<AppDispatch>()
     const [open, setOpen] = useState(false);
 
@@ -53,14 +53,14 @@ export default function ReviewButton({name /**, action */} : Button) {
 
     return (
         <>
-            <button type="button" onClick={() => setOpen(true)} className={`${pixelify.className} w-32 border-2 border-black hover:border-red-500 hover:text-red-500 hover:font-bold`}>Review</button>
-            <ReviewForm name={name} action={closeWindow} isOpen={open} /**onSubmit={action}*/></ReviewForm>
+            <button type="button" onClick={() => setOpen(true)} className={`${pixelify.className} mt-2 w-32 border-2 border-black hover:border-red-500 hover:text-red-500 hover:font-bold`}>Review</button>
+            <ReviewForm name={name} action={closeWindow} isOpen={open} onSubmit={action}></ReviewForm>
         </>
 
     );
 }
 
-function ReviewForm({ name, action, isOpen /**, onSubmit*/ }: PopUp) {
+function ReviewForm({ name, action, isOpen ,onSubmit}: PopUp) {
     const commentRef = useRef("");
     const [commentValue, setComment] = useState("")
     const [stars, setStars] = useState(0)
@@ -91,7 +91,7 @@ function ReviewForm({ name, action, isOpen /**, onSubmit*/ }: PopUp) {
                 // next: { tags: ['review_' + name] }
             }).then((responseJSON) => {
                 if (responseJSON["ok"]) {
-                    // onSubmit
+                    onSubmit()
                     closeWindow()
                 } else {
                     setWarningMessage("Internal error")

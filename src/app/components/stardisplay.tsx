@@ -4,19 +4,19 @@ import { useState, useEffect } from "react";
 import { RiStarFill, RiStarHalfFill, RiStarLine } from "react-icons/ri"
 import { fetchStarData } from "@/lib/data";
 
-export default function StarDisplay({ params }: {
-    params: {
-        name: string;
-    }
-}) {
+interface Params {
+    name: string
+    update: boolean
+}
 
-    const size = "20";
+export default function StarDisplay({ name, update }: Params) {
+    const size = "40";
 
     const [averageStars, setAverageStars] = useState(0)
     const [starArray, setStarArray] = useState<JSX.Element[]>([]);
 
     const fetchData = async () => {
-        const data = await fetchStarData(params.name)
+        const data = await fetchStarData(name)
         console.log(data + " DATA")
         if (data===undefined) {
             setAverageStars(0)
@@ -24,13 +24,10 @@ export default function StarDisplay({ params }: {
             setAverageStars(data)
         }
     }
+
     useEffect(() => {
         fetchData()
-
-        const intervalID = setInterval(fetchData, 10000)
-
-        return () => clearInterval(intervalID)
-    }, [])
+    }, [update])
 
     useEffect(() => {
         const newStarArray: JSX.Element[] = [];
@@ -52,7 +49,7 @@ export default function StarDisplay({ params }: {
 
     return (
         <>
-            <div className="flex flex-row">
+            <div className="mt-2 flex flex-row">
                 {starArray}
             </div>
         </>
