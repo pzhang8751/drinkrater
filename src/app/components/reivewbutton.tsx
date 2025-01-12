@@ -8,10 +8,11 @@ import { updateStars } from "@/lib/features/starSlice";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/lib/store";
 import { updateTag } from "@/lib/features/tagSlice";
+import { SiZedindustries, SiZelle } from "react-icons/si";
 
 interface Button {
-    name : string
-    action : () => void
+    name: string
+    action: () => void
 }
 
 interface PopUp {
@@ -26,7 +27,7 @@ interface Rating {
     action: (value: number) => void
 }
 
-export default function ReviewButton({name, action} : Button) {
+export default function ReviewButton({ name, action }: Button) {
     // const dispatch = useDispatch<AppDispatch>()
     const [open, setOpen] = useState(false);
 
@@ -37,7 +38,7 @@ export default function ReviewButton({name, action} : Button) {
         // })
     };
 
-    
+
 
     /** get tag states */
     // const tags = useAppSelector((state) => state.tagReducer.items)
@@ -53,14 +54,14 @@ export default function ReviewButton({name, action} : Button) {
 
     return (
         <>
-            <button type="button" onClick={() => setOpen(true)} className={`${pixelify.className} mt-2 w-32 border-2 border-black hover:border-red-500 hover:text-red-500 hover:font-bold`}>Review</button>
+            <button type="button" onClick={() => setOpen(true)} className={`${pixelify.className} w-32 border-2 border-black hover:border-red-500 hover:text-red-500 hover:font-bold`}>Review</button>
             <ReviewForm name={name} action={closeWindow} isOpen={open} onSubmit={action}></ReviewForm>
         </>
 
     );
 }
 
-function ReviewForm({ name, action, isOpen ,onSubmit}: PopUp) {
+function ReviewForm({ name, action, isOpen, onSubmit }: PopUp) {
     const commentRef = useRef("");
     const [commentValue, setComment] = useState("")
     const [stars, setStars] = useState(0)
@@ -79,7 +80,7 @@ function ReviewForm({ name, action, isOpen ,onSubmit}: PopUp) {
     }
 
     async function submitReview() {
-        if (stars>0) {
+        if (stars > 0) {
             await fetch('/api/submit-review', {
                 method: 'POST',
                 body: JSON.stringify({
@@ -129,29 +130,32 @@ function ReviewForm({ name, action, isOpen ,onSubmit}: PopUp) {
 }
 
 function StarRating({ stars, action }: Rating) {
-    let actualStars = 0;
 
     const [mousePosition, setMousePosition] = useState({ x: -1, y: -1 })
     const [isUp, setUp] = useState(true)
 
-    const starArray: any = []
+    const [starArray, setStarArray] = useState<JSX.Element[]>([])
     const size = 40
-    let starElements: any[];
+
+    const starContainer = document.getElementById("starContainer")
 
     useEffect(() => {
-        starElements = Array.from(document.getElementsByName("starReview"))
-    })
+        let tempArray: JSX.Element[] = []
 
-    /** Using a loop to determine how filled in the next star should be */
-    for (let i = 5, STARS = stars; i > 0; i--, STARS--) {
-        if (STARS >= 1) {
-            starArray.push(<RiStarFill size={size} name={"starReview"} key={"starReview_" + STARS} />)
-        } else if (STARS > 0) {
-            starArray.push(<RiStarHalfFill size={size} name={"starReview"} key={"starReview_" + STARS} />)
-        } else {
-            starArray.push(<RiStarLine size={size} name={"starReview"} key={"starReview_" + STARS} />)
+        for (let i = 5, STARS = stars; i > 0; i--, STARS--) {
+            if (STARS >= 1) {
+                tempArray.push(<RiStarFill size={size} name={"starReview"} key={"starReview_" + STARS} />)
+            } else if (STARS > 0) {
+                tempArray.push(<RiStarHalfFill size={size} name={"starReview"} key={"starReview_" + STARS} />)
+            } else {
+                tempArray.push(<RiStarLine size={size} name={"starReview"} key={"starReview_" + STARS} />)
+            }
         }
-    }
+
+        setStarArray(tempArray)
+    }, [stars])
+    /** Using a loop to determine how filled in the next star should be */
+
 
     // the logic should get the starting x and y of the element and then check which half of the elemtn it is in
     // which would be x + half size and y + half size so 15 in this scenario 
@@ -161,17 +165,16 @@ function StarRating({ stars, action }: Rating) {
         setMousePosition({ x: clientX, y: clientY })
 
         if (!isUp) {
-            starElements.forEach((element, i) => {
-                const rectangle = element.getBoundingClientRect()
-                if (mousePosition.x >= rectangle.x && mousePosition.x < rectangle.x + size / 2) {
-                    actualStars = i + 0.5
-                    action(actualStars)
-                } else if (mousePosition.x >= rectangle.x + size / 2 && mousePosition.x < rectangle.x + size) {
-                    actualStars = i + 1
-                    action(actualStars)
+            if (starContainer != null) {
+                const rectangle = starContainer.getBoundingClientRect()
 
+                let starIndex = (mousePosition.x - rectangle.x) / size; // Calculate star index
+                starIndex = Math.ceil(starIndex * 2) / 2
+
+                if (starIndex > 0) {
+                    action(starIndex)
                 }
-            })
+            }
         }
     }
 
@@ -184,16 +187,16 @@ function StarRating({ stars, action }: Rating) {
     }
 
     const onMouseClickHandler = (event: React.MouseEvent) => {
-        starElements.forEach((element, i) => {
-            const rectangle = element.getBoundingClientRect()
-            if (mousePosition.x >= rectangle.x && mousePosition.x < rectangle.x + size / 2) {
-                actualStars = i + 0.5
-                action(actualStars)
-            } else if (mousePosition.x >= rectangle.x + size / 2 && mousePosition.x < rectangle.x + size) {
-                actualStars = i + 1
-                action(actualStars)
+        if (starContainer != null) {
+            const rectangle = starContainer.getBoundingClientRect()
+
+            let starIndex = (mousePosition.x - rectangle.x) / size; // Calculate star index
+            starIndex = Math.ceil(starIndex * 2) / 2
+
+            if (starIndex > 0) {
+                action(starIndex)
             }
-        })
+        }
     }
 
     const resetInfo = () => {
@@ -202,10 +205,8 @@ function StarRating({ stars, action }: Rating) {
     }
 
     return (
-        <div onMouseMove={onMouseDragHandler} onMouseUp={onMouseUpHandler} onMouseDown={onMouseDownHandler} onClick={onMouseClickHandler} onMouseLeave={resetInfo} className="w-min flex hover:cursor-pointer">
-            {starArray.map((star: any) => {
-                return star;
-            })}
+        <div onMouseMove={onMouseDragHandler} onMouseUp={onMouseUpHandler} onMouseDown={onMouseDownHandler} onClick={onMouseClickHandler} onMouseLeave={resetInfo} id="starContainer" className="w-min flex hover:cursor-pointer">
+            {starArray}
         </div>
     )
 }
