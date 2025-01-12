@@ -119,18 +119,21 @@ export default async function Page({ params }: PageProps) {
                     <ReviewButton name={name}></ReviewButton>
                 </div>
             </section> */}
-            <section className="pt-24 pb-10 px-[5%]">
-                <div className="mr-10 h-72 w-[45%] sm:h-96 md:h-128 border border-black relative float-left">
+            <section className="pt-24 pb-8 px-[5%]">
+                <div className="mb-4 h-80 w-[100%] sm:h-96 sm:w-[45%] border border-black relative float-left">
                     <Image fill={true} style={{ objectFit: 'contain' }} src={'/drinkImages/' + name + '.jpg'} alt={"Image of " + name} />
                 </div>
-                <h1 className="font-bold text-2xl sm:text-5xl">
+                <h1 className="clear-both sm:max-w-[45%] font-bold text-4xl">
                     {name}
                 </h1>
-                <Link href={"/browse/brand/" + drink.brand}>
-                    <h2 className="mt-1 text-xl sm:text-3xl">
+                <h2 className="clear-both mt-1 text-2xl">
                         {drink.brand}
                     </h2>
-                </Link>
+                {/* <Link className="w-min" href={"/browse/brand/" + drink.brand}>
+                    <h2 className="clear-both mt-1 text-2xl">
+                        {drink.brand}
+                    </h2>
+                </Link> */}
                 <ReviewContainer name={name}></ReviewContainer>
 
             </section>

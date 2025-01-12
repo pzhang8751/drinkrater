@@ -54,7 +54,7 @@ export default function ReviewButton({ name, action }: Button) {
 
     return (
         <>
-            <button type="button" onClick={() => setOpen(true)} className={`${pixelify.className} w-32 border-2 border-black hover:border-red-500 hover:text-red-500 hover:font-bold`}>Review</button>
+            <button type="button" onClick={() => setOpen(true)} className={`${pixelify.className} mt-2 w-32 border-2 border-black hover:border-red-500 hover:text-red-500 hover:font-bold hover:scale-95 transition-all duration-200 ease-in-out`}>Review</button>
             <ReviewForm name={name} action={closeWindow} isOpen={open} onSubmit={action}></ReviewForm>
         </>
 

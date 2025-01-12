@@ -1,4 +1,5 @@
 import { sql } from '@vercel/postgres'
+import { GoRows } from 'react-icons/go';
 
 export async function fetchStarData(drinkName: string) {
     try {
@@ -18,3 +19,4 @@ export async function fetchStarData(drinkName: string) {
         // throw new Error('Failed to fetcnh drink data for ' + drinkName)
     }
 }
+
