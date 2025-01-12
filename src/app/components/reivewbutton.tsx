@@ -137,7 +137,13 @@ function StarRating({ stars, action }: Rating) {
     const [starArray, setStarArray] = useState<JSX.Element[]>([])
     const size = 40
 
-    const starContainer = document.getElementById("starContainer")
+    let starContainer = null
+
+    if (typeof window !== 'undefined') {
+        // You can now safely use `document`, `window`, etc.
+        starContainer = document.getElementById('starContainer');
+      }
+    
 
     useEffect(() => {
         let tempArray: JSX.Element[] = []
