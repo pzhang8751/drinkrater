@@ -17,13 +17,13 @@ export default function DrinkCarousel() {
 
 function Card() {
   return (
-    <div className="min-h-max min-w-max flex-col px-3 py-3 border-black border-[1px] transition hover:-translate-y-4 hover:shadow-xl shadow-black ease-in-out">
+    <div className="min-h-max min-w-max flex-col px-3 py-3 border-black border transition hover:-translate-y-4 hover:shadow-xl shadow-black ease-in-out">
       <Image
         src="/drinkImages/Coca-Cola.jpg"
         alt="image of drink"
         width={200}
         height={400}
-        className="border-[1px] border-black mb-3"
+        className="border border-black mb-3"
       />
       <p>Brand</p>
       <p className="font-semibold">Drink Name</p>

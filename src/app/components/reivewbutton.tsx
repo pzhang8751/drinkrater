@@ -122,7 +122,7 @@ function ReviewForm({ name, action, isOpen, onSubmit }: PopUp) {
       ></div>
       <section className="w-[74%] px-3 pt-2 pb-3 bg-white fixed top-[7%] left-[13%] z-40 space-y-2">
         <div className="flex">
-          <h2 className="flex-grow font-semibold text-lg">
+          <h2 className="grow font-semibold text-lg">
             Review {name} Drink
           </h2>
           <button
@@ -146,7 +146,7 @@ function ReviewForm({ name, action, isOpen, onSubmit }: PopUp) {
           ></textarea>
         </form>
         <div className="px-5 flex">
-          <p className="place-self-center flex-grow text-red-500">
+          <p className="place-self-center grow text-red-500">
             {warningMessage}
           </p>
           <button

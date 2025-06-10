@@ -120,7 +120,7 @@ export default async function Page({ params }: PageProps) {
                 </div>
             </section> */}
             <section className="pt-24 pb-8 px-[5%]">
-                <div className="mb-4 h-80 w-[100%] sm:h-96 sm:w-[45%] border border-black relative float-left">
+                <div className="mb-4 h-80 w-full sm:h-96 sm:w-[45%] border border-black relative float-left">
                     <Image fill={true} style={{ objectFit: 'contain' }} src={'/drinkImages/' + name + '.jpg'} alt={"Image of " + name} />
                 </div>
                 <h1 className="clear-both sm:max-w-[45%] font-bold text-4xl">

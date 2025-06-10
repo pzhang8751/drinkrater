@@ -94,7 +94,7 @@ function DropDown({ open, close, isOpen }: Menu) {
   return (
     <div
       className={
-        "px-5 bg-blue-100 border-b-[1px] border-black z-10 fixed flex flex-row space-x-5 transition-all ease-in-out overflow-hidden " +
+        "px-5 bg-blue-100 border-b border-black z-10 fixed flex flex-row space-x-5 transition-all ease-in-out overflow-hidden " +
         (isOpen ? "translate-y-16" : "-translate-y-44")
       }
       onMouseOver={open}

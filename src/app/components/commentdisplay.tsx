@@ -61,7 +61,7 @@ export default function CommentDisplay({ name, update }: Display) {
   return (
     <section className="mt-6 sm:mt-0 sm:top-24 sm:right-[5%] sm:absolute sm:w-[45%]">
       <h2 className="font-semibold text-4xl">Reviews</h2>
-      <div className="mt-2 max-h-128 overflow-auto border-[1px] border-black">
+      <div className="mt-2 max-h-128 overflow-auto border border-black">
         {comments}
       </div>
     </section>

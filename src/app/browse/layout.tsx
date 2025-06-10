@@ -18,7 +18,7 @@ export default function Layout({children}: {children:React.ReactNode}) {
                     <BrowseButton pathName="/browse/brand" buttonName="Brand"/>
                     <BrowseButton pathName="/browse/all" buttonName="All"/>
                 </div>
-                <hr className="w-[90%] border-black border-1"/>
+                <hr className="w-[90%] border-black border"/>
             </section>
             {children}
         </main>
