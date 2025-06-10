@@ -14,6 +14,7 @@ export async function POST(req: NextRequest) {
   const stars = data["stars"];
   const tags = data["tags"];
   const comment = data["comment"];
+  const date = Date.toString()
 
   try {
     if (!name) {

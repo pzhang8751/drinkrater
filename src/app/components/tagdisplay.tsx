@@ -1,4 +1,4 @@
-import { pixelify } from "./fonts"
+import { pixelify } from "../fonts"
 
 export default function TagDisplay({params} : {
     params: {

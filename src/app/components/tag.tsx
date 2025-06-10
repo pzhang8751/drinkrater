@@ -5,7 +5,7 @@ import { addTag, updateTag } from "@/lib/features/tagSlice";
 import { useDispatch } from "react-redux";
 
 import clsx from "clsx";
-import { pixelify } from "./fonts";
+import { pixelify } from "../fonts";
 import { AppDispatch, useAppSelector } from "@/lib/store";
 
 export default function Tag(tag: string) {
