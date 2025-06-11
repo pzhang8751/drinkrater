@@ -1,63 +1,132 @@
-{
-    "brands": [
-        "Coca-Cola",
-        "Deer Park",
-        "Fiji Water",
-        "Red Bull",
-        "Simply"
-    ],
-    "drinks": {
-        "Coca-Cola" : {
-            "brand": "Coca-Cola",
-            "type": "soda"
-        },
-        "Coca-Cola Spiced" : {
-            "brand": "Coca-Cola",
-            "type": "soda"
-        },
-        "Coca-Cola Zero Sugar" : {
-            "brand": "Coca-Cola",
-            "type": "soda"
-        },
-        "Deer Park Natural Spring Water" : {
-            "brand": "Deer Park",
-            "type": "water"
-        },
-        "Fiji Water" : {
-            "brand": "FIJI",
-            "type": "water"
-        },
-        "Red Bull Energy Drink" : {
-            "brand": "Red Bull",
-            "type": "energy"
-        },
-        "Red Bull Sugarfree" : {
-            "brand": "Red Bull",
-            "type": "energy"
-        },
-        "Red Bull Zero" : {
-            "brand": "Red Bull",
-            "type": "energy"
-        },
-        "Simply Lemonade" : {
-            "brand": "Simply",
-            "type": "juice"
-        },
-        "Simply Orange Juice" : {
-            "brand": "Simply",
-            "type": "juice"
-        }
+[
+    {
+        "name": "Coca-Cola Orange Cream",
+        "brand": "Coca-Cola",
+        "type": "soda"
     },
-    "tags": [
-        "Parties",
-        "Romantic",
-        "Special Event"
-    ],
-    "types": [
-        "alcohol",
-        "energy",
-        "juice",
-        "soda",
-        "water"
-    ]
-}
+    {
+        "name": "Coca-Cola",
+        "brand": "Coca-Cola",
+        "type": "soda"
+    },
+    {
+        "name": "Coca-Cola Zero Sugar",
+        "brand": "Coca-Cola",
+        "type": "soda"
+    },
+    {
+        "name": "Diet Coke",
+        "brand": "Coca-Cola",
+        "type": "soda"
+    },
+    {
+        "name": "Caffeine Free Diet Coke",
+        "brand": "Coca-Cola",
+        "type": "soda"
+    },
+    {
+        "name": "Sprite +Tea",
+        "brand": "Sprite",
+        "type": "soda"
+    },
+    {
+        "name": "Sprite +Tea Zero Sugar",
+        "brand": "Sprite",
+        "type": "soda"
+    },
+    {
+        "name": "Sprite",
+        "brand": "Sprite",
+        "type": "soda"
+    },
+    {
+        "name": "Sprite Zero Sugar",
+        "brand": "Sprite",
+        "type": "soda"
+    },
+    {
+        "name": "Sprite Chill",
+        "brand": "Sprite",
+        "type": "soda"
+    },
+    {
+        "name": "Sprite Chill Zero Sugar",
+        "brand": "Sprite",
+        "type": "soda"
+    },
+    {
+        "name": "Sprite Tropical Mix",
+        "brand": "Sprite",
+        "type": "soda"
+    },
+    {
+        "name": "Sprite Lymonade",
+        "brand": "Sprite",
+        "type": "soda"
+    },
+    {
+        "name": "Sprite Cherry",
+        "brand": "Sprite",
+        "type": "soda"
+    },
+    {
+        "name": "Fanta Orange",
+        "brand": "Fanta",
+        "type": "soda"
+    },
+    {
+        "name": "Fanta Zero Sugar Orange",
+        "brand": "Fanta",
+        "type": "soda"
+    },
+    {
+        "name": "Fanta Strawberry",
+        "brand": "Fanta",
+        "type": "soda"
+    },
+    {
+        "name": "Fanta Grape",
+        "brand": "Fanta",
+        "type": "soda"
+    },
+    {
+        "name": "Fanta Peach",
+        "brand": "Fanta",
+        "type": "soda"
+    },
+    {
+        "name": "Fanta Pineapple",
+        "brand": "Fanta",
+        "type": "soda"
+    },
+    {
+        "name": "Fanta Berry",
+        "brand": "Fanta",
+        "type": "soda"
+    },
+    {
+        "name": "Tropicana Original",
+        "brand": "Tropicana",
+        "type": "soda"
+    },
+    {
+        "name": "Tropicana Calcium + Vitamin D",
+        "brand": "Tropicana",
+        "type": "soda"
+    },
+    {
+        "name": "Tropicana Orange Tangerine",
+        "brand": "Tropicana",
+        "type": "soda"
+    },
+    {
+        "name": "Tropicana Orange Pineapple",
+        "brand": "Tropicana",
+        "type": "soda"
+    },
+    {
+        "name": "Tropicana Red Grapefruit",
+        "brand": "Tropicana",
+        "type": "soda"
+    }
+]
