@@ -21,6 +21,8 @@ export default function SearchBar() {
     if (event.key === "Enter") {
       if (input !== "") {
         router.replace(`/browse?search=${input}`);
+      } else {
+        router.replace('/browse')
       }
     }
   };
