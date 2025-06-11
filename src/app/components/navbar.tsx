@@ -25,7 +25,7 @@ export default function NavBar() {
   return (
     <>
       <nav className="px-[2%] h-16 w-screen fixed grid grid-cols-4 bg-white gap-x-4 text-sm sm:text-lg z-20">
-        <Link href="/" className="self-center font-bold underline-offset-4 hover:underline">
+        <Link href="/" className="w-min self-center font-bold underline-offset-4 hover:underline">
           Drinkrater
         </Link>
         <div className="col-span-2 grid grid-cols-3 gap-x-4 place-items-center text-nowrap">
@@ -34,7 +34,7 @@ export default function NavBar() {
           </Link>
           <Link
             id="browse"
-            href="/browse/type"
+            href="/browse"
             className={clsx("hover:text-red-500", {
               "text-red-500": pathName.includes("/browse"),
             })}
