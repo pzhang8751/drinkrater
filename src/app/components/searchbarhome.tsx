@@ -1,0 +1,27 @@
+"use client";
+
+import { IoIosSearch } from "react-icons/io";
+import { useRouter } from "next/navigation";
+
+export default function SearchBarHome() {
+  const router = useRouter();
+
+  const search = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      router.push("/browse/type");
+    }
+  };
+
+  return (
+    <div className="mt-8 py-2 px-4 w-[60%] border border-black rounded-4xl flex flex-row gap-x-2">
+      <IoIosSearch className="self-center" size={28} />
+      <input
+        type="text"
+        id="search"
+        onKeyDown={search}
+        placeholder="Begin your search now"
+        className="w-full text-xl outline-none"
+      ></input>
+    </div>
+  );
+}
