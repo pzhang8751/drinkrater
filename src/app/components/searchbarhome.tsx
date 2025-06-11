@@ -2,13 +2,17 @@
 
 import { IoIosSearch } from "react-icons/io";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function SearchBarHome() {
   const router = useRouter();
+  const [input, setInput] = useState(""); 
 
   const search = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
-      router.push("/browse/type");
+      if (input !== "") {
+        router.push(`/browse?search=${input}`);
+      }
     }
   };
 
@@ -18,6 +22,10 @@ export default function SearchBarHome() {
       <input
         type="text"
         id="search"
+        value={input}
+        onChange={(e)=>{
+          setInput(e.currentTarget.value)
+        }}
         onKeyDown={search}
         placeholder="Begin your search now"
         className="w-full text-xl outline-none"

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import DrinkCarousel from "./components/drinkcarousel";
+import SearchBarHome from "./components/searchbarhome";
 
 export const metadata: Metadata = {
   title: "Drinkrater",
@@ -8,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main className="*:flex-row *:justify-items-center">
+    <main className="*:justify-items-center">
       <section className="h-screen pt-44">
         <p className="text-xl sm:text-2xl md:text-3xl">Welcome to</p>
         <h1 className="text-7xl font-bold sm:text-8xl md:text-9xl">
@@ -17,6 +18,7 @@ export default function Home() {
         <p className="text-md sm:text-xl md:text-2xl">
           Find your next favorite drink
         </p>
+        <SearchBarHome></SearchBarHome>
       </section>
 
       <section className="mt-10">
