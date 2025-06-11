@@ -27,7 +27,7 @@ export default function BrowseDisplay() {
     let i = 0;
     let index = 0;
     while (i < 16 && i < data.length) {
-      if (data[i].name.includes(searchInput)) {
+      if (data[i].name.toLowerCase().includes(searchInput)) {
         drinks[index] = data[i];
         index++;
       }
