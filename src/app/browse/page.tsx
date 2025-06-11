@@ -3,7 +3,7 @@ import BrowseDisplay from "../components/browsedisplay"
 
 export default function Browse() {
     return (
-        <main className="py-16 px-10">
+        <main className="min-h-screen py-16 px-10">
             {/* toy around with the top design being fixed */}
             {/* fixed bg-white w-full z-10 border-b pb-4 (for p)*/}
             {/* could also add a button that goes to the top when u the search bar goes past the visible area */}
