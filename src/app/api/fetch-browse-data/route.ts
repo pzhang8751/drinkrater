@@ -9,14 +9,13 @@ if (uri) {
     client = new MongoClient(uri);
 }
 
-
-export async function GET(request: NextRequest) {
+export async function GET(request: NextRequest) { 
   try {
     await client.connect();
 
     const searchParams = request.nextUrl.searchParams;
     const search = searchParams.get("search");
-    let page = Number(searchParams.get("page"));
+    // let page = Number(searchParams.get("page"));
 
     const db = client.db("main_data").collection("drink_collection");
     let query = null; 
@@ -28,13 +27,17 @@ export async function GET(request: NextRequest) {
     }
 
     // 20 is the max number of searches per page currently
-    if (!isNaN(page)) {
-        page = (page-1)*20; 
-    }
+    // if (!isNaN(page)) {
+    //     page = (page-1)*20; 
+    // } else {
+    //     page = 0; 
+    // }
 
     // finding the first 20 after skipping the necessary number depending on the page number
-    console.log(db.find(query).skip(page).limit(20));
-    return NextResponse.json({result: "Succeded"})
+    // add back .skip after this first part works
+    const array = await db.find(query).limit(20).toArray()
+
+    return NextResponse.json(array)
   } catch (e: any) {
     console.log(e.stack);
     return NextResponse.json({error: "Internal Server Error"})

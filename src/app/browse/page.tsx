@@ -1,5 +1,8 @@
 import SearchBar from "../components/searchbar"
 import BrowseDisplay from "../components/browsedisplay"
+import React, { Suspense } from "react"
+
+// const BrowseDisplay = React.lazy(() => import("../components/browsedisplay"))
 
 export default function Browse() {
     return (
@@ -12,6 +15,10 @@ export default function Browse() {
                 <SearchBar></SearchBar>
             </div>
             <BrowseDisplay></BrowseDisplay>
+            {/* <Suspense fallback={<div className="font-bold">Loading...</div>}>
+                <BrowseDisplay />
+            </Suspense> */}
+
         </main>
     )
 }

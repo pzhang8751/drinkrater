@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
-import data from "@/app/drinkdata.json";
+import { useState, useEffect } from "react";
+// import data from "@/app/drinkdata.json";
 import Link from "next/link";
 
 type Drink = {
@@ -12,47 +13,40 @@ type Drink = {
 };
 
 export default function BrowseDisplay() {
-  const searchParams = useSearchParams();
-  const param = searchParams.get("search");
-  let searchInput = "";
-  let drinks: Drink[] = [];
-  let brands: string[] = [];
-  let type: string[] = [];
+  const [data, setData] = useState<Drink[] | null>(null);
+  const searchParams = useSearchParams().toString();
 
-  if (param !== null) {
-    searchInput = param;
-  }
+  useEffect(() => {
+    if (searchParams == null) return;
 
-  if (searchInput !== "") {
-    let i = 0;
-    let index = 0;
-    while (i < 16 && i < data.length) {
-      if (data[i].name.toLowerCase().includes(searchInput)) {
-        drinks[index] = data[i];
-        index++;
-      }
-      i++;
-    }
-  } else {
-    for (let i = 0; i < 16 && i < data.length; i++) {
-      drinks[i] = data[i];
-    }
-  }
+    fetch(`/api/fetch-browse-data?${searchParams}`)
+      .then((res) => res.json())
+      .then(setData);
+  }, [searchParams]);
+
+  // let brands: string[] = [];
+  // let type: string[] = [];
 
   function cards() {
-    if (drinks.length > 0) {
-      return (
-        <div className="grow gap-x-10 grid grid-cols-4 gap-y-8 justify-items-center">
-          {drinks.map((drink) => {
-            return <Card brand={drink.brand} name={drink.name}></Card>;
-          })}
-        </div>
-      );
+    if (data !== null) {
+      if (data.length > 0) {
+        return (
+          <div className="grow gap-x-10 grid grid-cols-4 gap-y-8 justify-items-center">
+            {data.map((drink: Drink) => {
+              return (
+                <Card
+                  key={`card_${drink.name}`}
+                  brand={drink.brand}
+                  name={drink.name}
+                ></Card>
+              );
+            })}
+          </div>
+        );
+      }
+      return <p className="italic">No drinks match search</p>;
     }
-
-    return (
-        <p className="italic">No drinks match search</p>
-    );
+    return <p className="italic">Loading...</p>;
   }
 
   return (
@@ -69,7 +63,7 @@ export default function BrowseDisplay() {
 function Card({ brand, name }: { brand: string; name: string }) {
   return (
     <Link href="/">
-      <div className="min-h-max min-w-max flex-col px-3 py-3 border-black border transition hover:-translate-y-3 hover:shadow-md shadow-black">
+      <div className="min-h-max w-[200px] flex-col px-3 py-3 border-black border transition hover:-translate-y-3 hover:shadow-md shadow-black">
         <Image
           src="/drinkImages/Coca-Cola.jpg"
           alt="image of drink"
@@ -78,7 +72,7 @@ function Card({ brand, name }: { brand: string; name: string }) {
           className="border border-black mb-3"
         />
         <p>{brand}</p>
-        <p className="font-semibold">{name}</p>
+        <p className="w-full font-semibold text-ellipsis truncate">{name}</p>
       </div>
     </Link>
   );
