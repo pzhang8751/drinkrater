@@ -1,22 +1,29 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import StarDisplay from "./stardisplay"
-import ReviewButton from "./oldreviewbutton"
+import ReviewButton from "./reviewbutton"
 import CommentDisplay from "./commentdisplay"
 
-interface Container {
-    name: string
+type Props = {
+    name: string,
+    // stars: number
 }
 
-export default function ReviewContainer({name} : Container) {
-    const [update, setUpdate] = useState(true)
+export default function ReviewContainer({name} : Props) {
+    const [update, setUpdate] = useState(false); 
+    const [averageStars, setStars] = useState(0)
+
+    useEffect(() => {
+        fetch(`/api/get-star-data?drink=${name}`).then((res) => res.json()).then(setStars)
+
+        console.log(averageStars)
+    }, [update])
 
     return (
-        <>
-            <StarDisplay name={name} update={update}></StarDisplay>
-            <ReviewButton name={name} action={() => setUpdate((prev) => !prev)}></ReviewButton>
-            <CommentDisplay name={name} update={update}></CommentDisplay>
-        </>
+        <section>
+            <StarDisplay stars={averageStars}></StarDisplay>
+            <ReviewButton name={name}></ReviewButton>
+        </section>
     )
 }
