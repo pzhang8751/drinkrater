@@ -1,4 +1,4 @@
-// import data from "@/app/drinkdata.json";
+
 import { NextRequest, NextResponse } from "next/server";
 import { MongoClient } from "mongodb";
 import { env } from "process";
@@ -39,7 +39,7 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json(array)
   } catch (e: any) {
-    console.log(e.stack);
+    //console.log(e.stack);
     return NextResponse.json({error: "Internal Server Error"})
   } finally {
     await client.close();

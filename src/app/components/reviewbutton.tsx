@@ -38,27 +38,32 @@ export default function ReviewButton({ name }: { name: string }) {
 function ReviewForm({ name, isOpen, closeWindow }: PopUp) {
   const [stars, setStars] = useState(0);
   const [comment, setComment] = useState("");
+  const [error, setError] = useState(""); 
 
   function resetWindow() {
     setStars(0);
     setComment("");
-    closeWindow(); 
+    setError(""); 
+    closeWindow();
   }
 
   function onSubmit() {
-    console.log("hello");
-    // fetch("/api/post-review", {
-    //   method: "POST",
-    //   body: JSON.stringify({
-    //     name: { name },
-    //     stars: { stars },
-    //     comment: { comment },
-    //   }),
-    //   headers: {
-    //     "Content-type": "application/json; charset=UTF-8",
-    //   },
-    // });
-    resetWindow(); 
+    if (stars <= -1) {
+      setError("Please give a star rating");
+    } else {
+      fetch("/api/post-review", {
+        method: "POST",
+        body: JSON.stringify({
+          name: name,
+          stars: stars,
+          comment: comment,
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      });
+      resetWindow();
+    }
   }
 
   if (isOpen) {
@@ -94,9 +99,10 @@ function ReviewForm({ name, isOpen, closeWindow }: PopUp) {
                 {comment.length}/300
               </p>
             </div>
+            <p className="italic text-red-500 font-light">{error}</p>
             <button
               type="submit"
-              className="py-2 px-3 text-white bg-black hover:cursor-pointer"
+              className="py-2 px-3 text-white bg-black hover:cursor-pointer hover:scale-90 hover:bg-pink-400"
             >
               Submit
             </button>
