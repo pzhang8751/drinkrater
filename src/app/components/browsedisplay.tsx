@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
-// import data from "@/app/drinkdata.json";
 import Link from "next/link";
 
 type Drink = {
@@ -19,7 +18,7 @@ export default function BrowseDisplay() {
   useEffect(() => {
     if (searchParams == null) return;
 
-    fetch(`/api/fetch-browse-data?${searchParams}`)
+    fetch(`/api/get-browse-data?${searchParams}`)
       .then((res) => res.json())
       .then(setData);
   }, [searchParams]);
@@ -50,8 +49,8 @@ export default function BrowseDisplay() {
   }
 
   return (
-    <div className="flex flex-row gap-x-12 *:pt-10">
-      <div className="w-48 border-r [&>h2]:font-semibold [&>h2]:text-xl">
+    <div className="flex flex-row overflow-hidden gap-x-12 *:pt-10">
+      <div className="min-w-48 border-r [&>h2]:font-semibold [&>h2]:text-xl">
         <h2>Brand</h2>
         <h2>Type</h2>
       </div>
@@ -62,7 +61,7 @@ export default function BrowseDisplay() {
 
 function Card({ brand, name }: { brand: string; name: string }) {
   return (
-    <Link href="/">
+    <Link href={`/drink/${name}/${brand}/soda`}>
       <div className="min-h-max w-[200px] flex-col px-3 py-3 border-black border transition hover:-translate-y-3 hover:shadow-md shadow-black">
         <Image
           src="/drinkImages/Coca-Cola.jpg"

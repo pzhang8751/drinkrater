@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import StarDisplay from "./stardisplay"
-import ReviewButton from "./reivewbutton"
+import ReviewButton from "./oldreviewbutton"
 import CommentDisplay from "./commentdisplay"
 
 interface Container {
