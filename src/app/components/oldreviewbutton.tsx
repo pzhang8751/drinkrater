@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import { pixelify } from "../fonts";
 import { RiStarFill, RiStarHalfFill, RiStarLine } from "react-icons/ri";
 import { useAppSelector } from "@/lib/store";
 import { updateStars } from "@/lib/features/starSlice";
@@ -55,7 +54,7 @@ export default function ReviewButton({ name, action }: Button) {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className={`${pixelify.className} mt-2 w-32 border-2 border-black hover:border-red-500 hover:text-red-500 hover:font-bold hover:scale-95 transition-all duration-200 ease-in-out`}
+        className="mt-2 w-32 border-2 border-black hover:border-red-500 hover:text-red-500 hover:font-bold hover:scale-95 transition-all duration-200 ease-in-out"
       >
         Review
       </button>
