@@ -2,7 +2,6 @@
 import "./globals.css";
 import { inter } from "./fonts";
 import NavBar from "./components/navbar";
-import StoreProvider from "./StoreProvider";
 import Footer from "./components/footer";
 
 export default function RootLayout({
@@ -15,7 +14,7 @@ export default function RootLayout({
 
       <body>
         <NavBar/>
-        <StoreProvider>{children}</StoreProvider>
+        {children}
         <Footer></Footer>
       </body>
 
