@@ -4,15 +4,20 @@ import { useState } from "react";
 import React from "react";
 import Form from "next/form";
 
+type Button = {
+  name: string;
+  sendUpdate: () => void; 
+}
+
 type PopUp = {
   name: string;
   isOpen: boolean;
+  sendUpdate: () => void; 
   closeWindow: () => void;
 };
 
-export default function ReviewButton({ name }: { name: string }) {
+export default function ReviewButton({ name, sendUpdate }: Button) {
   const [open, setOpen] = useState(false);
-  console.log(open);
 
   return (
     <React.Fragment>
@@ -30,12 +35,13 @@ export default function ReviewButton({ name }: { name: string }) {
         closeWindow={() => {
           setOpen(false);
         }}
+        sendUpdate={sendUpdate}
       ></ReviewForm>
     </React.Fragment>
   );
 }
 
-function ReviewForm({ name, isOpen, closeWindow }: PopUp) {
+function ReviewForm({ name, isOpen, sendUpdate, closeWindow }: PopUp) {
   const [stars, setStars] = useState(0);
   const [comment, setComment] = useState("");
   const [error, setError] = useState(""); 
@@ -62,6 +68,7 @@ function ReviewForm({ name, isOpen, closeWindow }: PopUp) {
           "Content-type": "application/json; charset=UTF-8",
         },
       });
+      sendUpdate();
       resetWindow();
     }
   }
