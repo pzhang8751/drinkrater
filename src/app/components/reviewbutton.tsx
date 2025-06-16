@@ -69,6 +69,7 @@ function ReviewForm({ name, isOpen, sendUpdate, closeWindow }: PopUp) {
           "Content-type": "application/json; charset=UTF-8",
         },
       });
+      fetch(`/api/update-stars-reviews?drink=${name}&stars=${stars}`, {method: "PUT"})
       sendUpdate();
       resetWindow();
     }
