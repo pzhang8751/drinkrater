@@ -3,6 +3,7 @@
 import { useState } from "react";
 import React from "react";
 import Form from "next/form";
+import ReviewStars from "./reviewstars";
 
 type Button = {
   name: string;
@@ -92,6 +93,7 @@ function ReviewForm({ name, isOpen, sendUpdate, closeWindow }: PopUp) {
           </div>
 
           <Form action={onSubmit}>
+            <ReviewStars stars={stars} setStars={setStars}></ReviewStars>
             <div className="p-2 border">
               <textarea
                 maxLength={300}
