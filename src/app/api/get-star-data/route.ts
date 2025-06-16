@@ -19,7 +19,7 @@ export async function GET(request: NextRequest) {
     let averageStars = 0; 
 
     if (data !== null) {
-      const stars = data.total_reviews;
+      const stars = data.total_stars;
       const reviews = data.total_reviews;
 
       // calculating average stars roudned to nearest half

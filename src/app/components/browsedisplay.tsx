@@ -21,6 +21,7 @@ export default function BrowseDisplay() {
     fetch(`/api/get-browse-data?${searchParams}`)
       .then((res) => res.json())
       .then(setData);
+    // console.log(data)
   }, [searchParams]);
 
   // let brands: string[] = [];

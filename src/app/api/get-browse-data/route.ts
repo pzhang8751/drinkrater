@@ -18,12 +18,10 @@ export async function GET(request: NextRequest) {
     // let page = Number(searchParams.get("page"));
 
     const db = client.db("main_data").collection("drink_collection");
-    let query = null; 
+    let query = {}; 
 
     if (search !== null) {
         query = { "name": { $regex: `${search}`, $options: "i"} };
-    } else {
-        query = {}; 
     }
 
     // 20 is the max number of searches per page currently

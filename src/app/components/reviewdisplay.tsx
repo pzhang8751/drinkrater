@@ -1,6 +1,8 @@
 import React from "react";
 import { useState } from "react";
 
+// full screen review display
+
 export default function ReviewDisplay() {
   const [isOpen, setOpen] = useState(false);
 
