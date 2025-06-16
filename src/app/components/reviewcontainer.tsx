@@ -11,10 +11,15 @@ type Props = {
     // stars: number
 }
 
+type Review = {
+    stars: number,
+    comment: string, 
+}
+
 export default function ReviewContainer({name} : Props) {
     const [update, setUpdate] = useState(false); 
     const [averageStars, setStars] = useState(0);
-    const [reviews, setReviews] = useState([]);
+    const [reviews, setReviews] = useState<Review[] | null>(null);
 
     useEffect(() => {
         fetch(`/api/get-star-data?drink=${name}`).then((res) => res.json()).then(setStars)
@@ -37,9 +42,10 @@ export default function ReviewContainer({name} : Props) {
                 a new review comes in. or if there are top reviews then it only needs to fetch once, enought to fill the space
                 -- i think just make it client side for now and improve upon it later  
             */}
-            <h2>Recent Reviews</h2>
-            <hr/>
+            <h2 className="font-semibold">Recent Reviews</h2>
+            <hr className="w-[50%]"/>
             <ReviewPreview reviews={reviews}></ReviewPreview>
+
         </section>
     )
 }
