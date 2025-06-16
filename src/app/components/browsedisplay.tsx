@@ -2,12 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { getData } from "@/lib/db";
 
-// type Drink = {
-//   name: string;
-//   brand: string;
-//   type: string;
-// };
-
 export default async function BrowseDisplay({ search }: { search: string | undefined}) {
   const data = await getData(search);
 
@@ -28,9 +22,10 @@ export default async function BrowseDisplay({ search }: { search: string | undef
           </div>
         );
       }
-      return <p className="italic">No drinks match search</p>;
+      
     }
-    // return <p className="italic">Loading...</p>;
+
+    return <p className="italic">No drinks match search</p>;
   }
 
   return (

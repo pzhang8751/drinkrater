@@ -28,10 +28,7 @@ export default async function Browse({
       <Suspense fallback={<div className="font-bold">Loading...</div>}>
         <BrowseDisplay search={search}></BrowseDisplay>
       </Suspense>
-
-      {/* <Suspense fallback={<div className="font-bold">Loading...</div>}>
-        <BrowseDisplay></BrowseDisplay>
-      </Suspense> */}
+      {/* ADD THE PAGE CHOOSE UNDERNEATH THIS WOWWW so that it can be client side while the browse display is server side*/}
     </main>
   );
 }

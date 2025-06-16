@@ -18,7 +18,7 @@ export default function ReviewPreview({
     // fetches top three reviews
 
     return reviews?.map((review: Review) => {
-      return <ReviewCard review={review}></ReviewCard>;
+      return <ReviewCard key={"preview_" + review._id} review={review}></ReviewCard>;
     });
   }
 
@@ -41,7 +41,7 @@ export default function ReviewPreview({
 export function ReviewCard({ review }: { review: Review }) {
   return (
   <div className="p-2 ">
-    <StarDisplay key={"preview_" + review._id} stars={review.stars} size={24}></StarDisplay>
+    <StarDisplay stars={review.stars} size={24}></StarDisplay>
     <p>{review.comment}</p>
   </div>
   );
