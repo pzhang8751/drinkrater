@@ -1,26 +1,33 @@
-import { sql } from "@vercel/postgres"
-import { NextRequest, NextResponse } from "next/server"
 
-export async function GET(req: NextRequest) {
-    const name = req.nextUrl.searchParams.get("name"); 
-    const amount = req.nextUrl.searchParams.get("amount"); 
+import { NextRequest, NextResponse } from "next/server";
+import { MongoClient } from "mongodb";
+import { env } from "process";
 
+const uri = env.MONGODB_URL;
+let client: MongoClient; 
+if (uri) {
+    client = new MongoClient(uri);
+}
 
-
+export async function GET(request: NextRequest) {
     try {
+        await client.connect()
 
-        const data = await sql`SELECT stars AS stars, comment AS comment
-                                FROM ratings WHERE (drinkName=${name}) 
-                                LIMIT ${amount}`
+        const db = client.db("main_data").collection("reviews")
+        const data = request.nextUrl.searchParams.get("drink")
+        let query = {}; 
+        if (data != null) {
+            query = {"name" : data}
+        } else {
+            throw Error;
+        }
 
-        // const data = await sql`SELECT stars AS stars, comment AS comment
-        //                         FROM ratings WHERE (drinkName='Coca-Cola')`
+        const array = await db.find(query).sort({ _id: -1}).limit(3).toArray()
 
-        return NextResponse.json({ data }, { status: 200 })
-    } catch (error) {
-        // console.log(error)
-        return NextResponse.json({ status: 500 })
+        return NextResponse.json(array)
+    } catch {
+        return NextResponse.json({error: "Internal Server Error"})
+    } finally {
+        await client.close() 
     }
-
-
 }
