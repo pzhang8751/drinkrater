@@ -26,7 +26,7 @@ export default function ReviewButton({ name, sendUpdate }: Button) {
         onClick={() => {
           setOpen(true);
         }}
-        className="p-2 text-xl hover:cursor-pointer text-white bg-black hover:scale-90 transition ease-in-out hover:bg-pink-400"
+        className="w-min p-2 text-xl place-self-end hover:cursor-pointer text-white bg-black hover:scale-90 transition ease-in-out hover:bg-pink-400"
       >
         Review
       </button>

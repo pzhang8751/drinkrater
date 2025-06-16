@@ -1,7 +1,9 @@
 import ReviewDisplay from "./reviewdisplay";
 import React from "react";
+import StarDisplay from "./stardisplay";
 
 type Review = {
+  _id: string;
   stars: number;
   comment: string;
 };
@@ -14,20 +16,33 @@ export default function ReviewPreview({
   function createReviews() {
     // use map to create reviews to pop up the space
     // fetches top three reviews
-    return <></>;
+
+    return reviews?.map((review: Review) => {
+      return <ReviewCard review={review}></ReviewCard>;
+    });
   }
+
   if (reviews == null) {
-    return <p className="italic">Loading...</p>;
+    return <p className="italic border-t">Loading...</p>;
   } else {
     if (reviews.length > 0) {
       return (
         <React.Fragment>
-          <div className="overflow-hidden">{createReviews()}</div>
+          <div className="overflow-hidden *:border-t border-x border-b">{createReviews()}</div>
           <ReviewDisplay></ReviewDisplay>
         </React.Fragment>
       );
     }
 
-    return <p className="italic">Be the first to leave a review</p>;
+    return <p className="italic border-t">Be the first to leave a review</p>;
   }
+}
+
+export function ReviewCard({ review }: { review: Review }) {
+  return (
+  <div className="p-2 ">
+    <StarDisplay key={"preview_" + review._id} stars={review.stars} size={24}></StarDisplay>
+    <p>{review.comment}</p>
+  </div>
+  );
 }
