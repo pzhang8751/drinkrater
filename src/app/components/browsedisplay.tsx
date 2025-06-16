@@ -1,38 +1,22 @@
-"use client";
-
 import Image from "next/image";
-import { useSearchParams } from "next/navigation";
-import { useState, useEffect } from "react";
 import Link from "next/link";
+import { getData } from "@/lib/db";
 
-type Drink = {
-  name: string;
-  brand: string;
-  type: string;
-};
+// type Drink = {
+//   name: string;
+//   brand: string;
+//   type: string;
+// };
 
-export default function BrowseDisplay() {
-  const [data, setData] = useState<Drink[] | null>(null);
-  const searchParams = useSearchParams().toString();
-
-  useEffect(() => {
-    if (searchParams == null) return;
-
-    fetch(`/api/get-browse-data?${searchParams}`)
-      .then((res) => res.json())
-      .then(setData);
-    // console.log(data)
-  }, [searchParams]);
-
-  // let brands: string[] = [];
-  // let type: string[] = [];
+export default async function BrowseDisplay({ search }: { search: string | undefined}) {
+  const data = await getData(search);
 
   function cards() {
-    if (data !== null) {
+    if (data != undefined) {
       if (data.length > 0) {
         return (
           <div className="grow gap-x-10 grid grid-cols-4 gap-y-8 justify-items-center">
-            {data.map((drink: Drink) => {
+            {data.map((drink) => {
               return (
                 <Card
                   key={`card_${drink.name}`}
@@ -46,7 +30,7 @@ export default function BrowseDisplay() {
       }
       return <p className="italic">No drinks match search</p>;
     }
-    return <p className="italic">Loading...</p>;
+    // return <p className="italic">Loading...</p>;
   }
 
   return (

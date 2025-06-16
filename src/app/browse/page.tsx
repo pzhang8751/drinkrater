@@ -4,7 +4,14 @@ import React, { Suspense } from "react";
 
 // const BrowseDisplay = React.lazy(() => import("../components/browsedisplay"))
 
-export default function Browse() {
+export default async function Browse({
+  searchParams,
+}: {
+  searchParams: Promise<{ search: string | undefined}>;
+}) {
+
+  const {search} = await searchParams; 
+
   return (
     <main className="min-h-screen py-16 px-10">
       {/* toy around with the top design being fixed */}
@@ -18,7 +25,10 @@ export default function Browse() {
         </Suspense> */}
         <SearchBar></SearchBar>
       </div>
-      <BrowseDisplay></BrowseDisplay>
+      <Suspense fallback={<div className="font-bold">Loading...</div>}>
+        <BrowseDisplay search={search}></BrowseDisplay>
+      </Suspense>
+
       {/* <Suspense fallback={<div className="font-bold">Loading...</div>}>
         <BrowseDisplay></BrowseDisplay>
       </Suspense> */}
