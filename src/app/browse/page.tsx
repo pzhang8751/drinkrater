@@ -33,5 +33,5 @@ function LoadingDisplay() {
     <Spinner className="animate-spin mr-10" size={75}></Spinner>
     <p className="font-bold text-3xl">Loading ...</p>
   </div>
-)
+  )
 }

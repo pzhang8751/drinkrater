@@ -9,6 +9,7 @@ type Review = {
   _id: string;
   stars: number;
   comment: string;
+  likes: number;
 };
 
 export async function ReviewPreview({name} : {name:string}) {
