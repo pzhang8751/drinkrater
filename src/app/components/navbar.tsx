@@ -11,11 +11,6 @@ interface Menu {
   isOpen: boolean;
 }
 
-interface SearchLinks {
-  category: string;
-  action: () => void;
-}
-
 export default function NavBar() {
   const pathName = usePathname();
 
@@ -47,47 +42,9 @@ export default function NavBar() {
           </Link>
         </div>
       </nav>
-      {/* <DropDown
-        open={() => setDropdown(true)}
-        close={() => setDropdown(false)}
-        isOpen={openDropdown}
-      ></DropDown> */}
     </>
   );
 }
-
-// function links({ category, action }: SearchLinks) {
-//   let array = drinkData.types;
-//   if (category === "brand") array = drinkData.brands;
-
-//   const linkArrayData = [];
-
-//   /** This is adding 5 random links to the types / brands section by removing a random type/ brand from the array */
-//   //THIS IS THE PROBLEM AREA HAHAHAHHAHAHHAHAHAH random things / editing the array mess with server
-//   for (let i = 0; i < 5 && array.length > 0; i++) {
-//     // linkArrayData[i] = array.splice(Math.floor(Math.random()*array.length),1)[0];
-//     //temp fix
-//     linkArrayData[i] = array[i];
-//   }
-
-//   return (
-//     <>
-//       {linkArrayData.map((data) => {
-//         // console.log(data);
-//         return (
-//           <Link
-//             key={"browse_link_" + data}
-//             href={"/browse/" + category + "/" + data}
-//             className="hover:underline"
-//             onClick={action}
-//           >
-//             {data[0].toUpperCase() + data.slice(1)}
-//           </Link>
-//         );
-//       })}
-//     </>
-//   );
-// }
 
 // function DropDown({ open, close, isOpen }: Menu) {
 //   return (
