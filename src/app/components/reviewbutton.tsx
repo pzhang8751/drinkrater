@@ -1,23 +1,22 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import React from "react";
 import Form from "next/form";
 import ReviewStars from "./reviewstars";
 
 type Button = {
   name: string;
-  sendUpdate: () => void; 
 }
 
 type PopUp = {
   name: string;
   isOpen: boolean;
-  sendUpdate: () => void; 
   closeWindow: () => void;
 };
 
-export default function ReviewButton({ name, sendUpdate }: Button) {
+export default function ReviewButton({ name }: {name: string}) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -36,13 +35,13 @@ export default function ReviewButton({ name, sendUpdate }: Button) {
         closeWindow={() => {
           setOpen(false);
         }}
-        sendUpdate={sendUpdate}
       ></ReviewForm>
     </React.Fragment>
   );
 }
 
-function ReviewForm({ name, isOpen, sendUpdate, closeWindow }: PopUp) {
+function ReviewForm({ name, isOpen, closeWindow }: PopUp) {
+  const router = useRouter(); 
   const [stars, setStars] = useState(0);
   const [comment, setComment] = useState("");
   const [error, setError] = useState(""); 
@@ -64,14 +63,15 @@ function ReviewForm({ name, isOpen, sendUpdate, closeWindow }: PopUp) {
           name: name,
           stars: stars,
           comment: comment,
+          likes: 0
         }),
         headers: {
           "Content-type": "application/json; charset=UTF-8",
         },
       });
       fetch(`/api/update-stars-reviews?drink=${name}&stars=${stars}`, {method: "PUT"})
-      sendUpdate();
       resetWindow();
+      router.refresh(); 
     }
   }
 

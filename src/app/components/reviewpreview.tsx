@@ -17,32 +17,37 @@ export default function ReviewPreview({
     // use map to create reviews to pop up the space
     // fetches top three reviews
 
-    return reviews?.map((review: Review) => {
-      return <ReviewCard key={"preview_" + review._id} review={review}></ReviewCard>;
-    });
-  }
-
-  if (reviews == null) {
-    return <p className="italic border-t">Loading...</p>;
-  } else {
-    if (reviews.length > 0) {
+    if (reviews !== undefined && reviews != null && reviews.length > 0) {
       return (
-        <React.Fragment>
-          <div className="overflow-hidden *:border-t border-x border-b">{createReviews()}</div>
-          <ReviewDisplay></ReviewDisplay>
-        </React.Fragment>
+        <div className="*:border-t border-x border-b">
+          {reviews.map((review: Review) => {
+            return (
+              <ReviewCard
+                key={"preview_" + review._id}
+                review={review}
+              ></ReviewCard>
+            );
+          })}
+        </div>
       );
     }
 
     return <p className="italic border-t">Be the first to leave a review</p>;
   }
+
+  return (
+    <React.Fragment>
+      {createReviews()}
+      <ReviewDisplay></ReviewDisplay>
+    </React.Fragment>
+  );
 }
 
 export function ReviewCard({ review }: { review: Review }) {
   return (
-  <div className="p-2 ">
-    <StarDisplay stars={review.stars} size={24}></StarDisplay>
-    <p>{review.comment}</p>
-  </div>
+    <div className="p-2 ">
+      <StarDisplay stars={review.stars} size={24}></StarDisplay>
+      <p>{review.comment}</p>
+    </div>
   );
 }

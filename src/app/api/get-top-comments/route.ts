@@ -22,7 +22,7 @@ export async function GET(request: NextRequest) {
             throw Error;
         }
 
-        const array = await db.find(query).sort({ _id: -1}).limit(3).toArray()
+        const array = await db.find(query).sort({ _id: -1, likes: -1}).limit(3).toArray()
 
         return NextResponse.json(array)
     } catch {
