@@ -13,18 +13,11 @@ export default async function Browse({
   const {search} = await searchParams; 
 
   return (
-    <main className="min-h-screen py-16 px-10">
+    <main className="min-h-screen py-16">
       {/* toy around with the top design being fixed */}
       {/* fixed bg-white w-full z-10 border-b pb-4 (for p)*/}
       {/* could also add a button that goes to the top when u the search bar goes past the visible area */}
-      <div className="pt-10 flex flex-row gap-x-12 items-center">
-        <p className="w-48 font-bold text-5xl border-r">Filter</p>
-
-        {/* <Suspense fallback={<div className="font-bold">Loading...</div>}>
-          <SearchBar></SearchBar>
-        </Suspense> */}
-        <SearchBar></SearchBar>
-      </div>
+      <SearchBar></SearchBar>
       <Suspense fallback={<LoadingDisplay></LoadingDisplay>}>
         <BrowseDisplay search={search}></BrowseDisplay>
       </Suspense>

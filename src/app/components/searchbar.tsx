@@ -28,8 +28,8 @@ export default function SearchBar() {
   };
 
   return (
-    <div className="h-min py-1 px-3 w-[40%] border rounded-4xl flex flex-row gap-x-2">
-      <IoIosSearch className="self-center" size={24} />
+    <div className="h-min py-1 px-3 w-max md:w-48 border rounded-4xl flex flex-row gap-x-2 place-self-center md:place-self-auto">
+      <IoIosSearch className="self-center size-6" />
       <input
         type="text"
         id="search"
@@ -39,7 +39,7 @@ export default function SearchBar() {
           setInput(e.currentTarget.value);
         }}
         onKeyDown={search}
-        className="w-full text-lg outline-none"
+        className="w-full text-md md:text-lg outline-none"
       ></input>
     </div>
   );
