@@ -2,7 +2,7 @@ import SearchBar from "../components/searchbar";
 import BrowseDisplay from "../components/browsedisplay";
 import React, { Suspense } from "react";
 
-// const BrowseDisplay = React.lazy(() => import("../components/browsedisplay"))
+import { ImSpinner6 as Spinner } from "react-icons/im";
 
 export default async function Browse({
   searchParams,
@@ -25,10 +25,20 @@ export default async function Browse({
         </Suspense> */}
         <SearchBar></SearchBar>
       </div>
-      <Suspense fallback={<div className="font-bold">Loading...</div>}>
+      <Suspense fallback={<LoadingDisplay></LoadingDisplay>}>
         <BrowseDisplay search={search}></BrowseDisplay>
       </Suspense>
+
       {/* ADD THE PAGE CHOOSE UNDERNEATH THIS WOWWW so that it can be client side while the browse display is server side*/}
     </main>
   );
+}
+
+function LoadingDisplay() {
+  return (
+  <div className="h-[50vh] w-full flex flex-row justify-center items-center">
+    <Spinner className="animate-spin mr-10" size={75}></Spinner>
+    <p className="font-bold text-3xl">Loading ...</p>
+  </div>
+)
 }
