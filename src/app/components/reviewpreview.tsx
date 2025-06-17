@@ -1,6 +1,9 @@
 import ReviewDisplay from "./reviewdisplay";
 import React from "react";
-import StarDisplay from "./stardisplay";
+import { ImSpinner6 as Spinner } from "react-icons/im";
+import { getTopComments } from "@/lib/db";
+
+import { StaticReviewCard } from "./review";
 
 type Review = {
   _id: string;
@@ -8,11 +11,10 @@ type Review = {
   comment: string;
 };
 
-export default function ReviewPreview({
-  reviews,
-}: {
-  reviews: Review[] | null;
-}) {
+export async function ReviewPreview({name} : {name:string}) {
+
+  const reviews = await getTopComments(name); 
+
   function createReviews() {
     // use map to create reviews to pop up the space
     // fetches top three reviews
@@ -22,10 +24,11 @@ export default function ReviewPreview({
         <div className="*:border-t border-x border-b">
           {reviews.map((review: Review) => {
             return (
-              <ReviewCard
+              <StaticReviewCard
                 key={"preview_" + review._id}
                 review={review}
-              ></ReviewCard>
+                size={24}
+              ></StaticReviewCard>
             );
           })}
         </div>
@@ -43,11 +46,11 @@ export default function ReviewPreview({
   );
 }
 
-export function ReviewCard({ review }: { review: Review }) {
+export function ReviewPreviewFallBack() {
   return (
-    <div className="p-2 ">
-      <StarDisplay stars={review.stars} size={24}></StarDisplay>
-      <p>{review.comment}</p>
-    </div>
-  );
+  <div className="h-[50vh] w-full flex flex-row justify-center items-center">
+    <Spinner className="animate-spin mr-10" size={75}></Spinner>
+    <p className="font-bold text-3xl">Loading ...</p>
+  </div>
+  )
 }

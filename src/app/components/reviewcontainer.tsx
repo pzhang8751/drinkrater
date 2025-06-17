@@ -1,22 +1,22 @@
-// import { useState, useEffect } from "react";
-import StarDisplay from "./stardisplay";
+
+import {StarDisplay, StarDisplayFallBack }from "./stardisplay";
+import {ReviewPreview, ReviewPreviewFallBack} from "./reviewpreview";
 import ReviewButton from "./reviewbutton";
-import ReviewPreview from "./reviewpreview";
-import { getAverageStars, getTopComments } from "@/lib/db";
+import { Suspense } from "react";
 
-export default async function ReviewContainer({ name }: {name: string}) {
-
-  const averageStars = await getAverageStars(name); 
-  const reviews = await getTopComments(name); 
+export default function ReviewContainer({ name }: {name: string}) {
 
   return (
     <section className="flex flex-col">
-      <StarDisplay stars={averageStars} size={40}></StarDisplay>
+      <Suspense fallback={<StarDisplayFallBack size={40}></StarDisplayFallBack>}>
+        <StarDisplay name={name} size={40}></StarDisplay>
+      </Suspense>
+
       <h2 className="font-semibold">Recent Reviews</h2>
-      <ReviewPreview reviews={reviews}></ReviewPreview>
-      <ReviewButton
-        name={name}
-      ></ReviewButton>
+      <Suspense fallback={<ReviewPreviewFallBack></ReviewPreviewFallBack>}>
+        <ReviewPreview name={name}></ReviewPreview>
+      </Suspense>
+      <ReviewButton name={name}></ReviewButton>
     </section>
   );
 }
