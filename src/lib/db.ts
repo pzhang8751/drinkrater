@@ -12,6 +12,18 @@ export async function getBrowseData(search: string | undefined) {
   return res.json()
 }
 
+export async function getFilterData(search: string | undefined) {
+  let apiRoute = "http://localhost:3000/api/get-filter-data"
+
+  if (search !== undefined) {
+    apiRoute += `?search=${search}`
+  }
+
+  const res = await fetch(apiRoute, {method:"GET"})
+
+  return res.json()
+}
+
 export async function getAverageStars(name: string) {
    const apiRoute = `http://localhost:3000/api/get-star-data?drink=${name}`
 
@@ -28,4 +40,6 @@ export async function getTopComments(name: string) {
 
   return res.json()
 }
+
+
 
