@@ -9,12 +9,12 @@ import { getBrowseData, getFilterData } from "@/lib/db";
 export default async function Browse({
   searchParams,
 }: {
-  searchParams: Promise<{ search: string | undefined }>;
+  searchParams: Promise<{ search: string | undefined, brand: string | string[] | undefined }>;
 }) {
-  const { search } = await searchParams;
+  const { search, brand } = await searchParams;
 
   const browseData = await getBrowseData(search);
-  const filterData = await getFilterData(search); 
+  const filterData = getFilterData(search); 
 
   return (
     <main className="min-h-screen py-16">
@@ -25,7 +25,10 @@ export default async function Browse({
 
       <div className="flex flex-row *:mt-4 *:md:mt-10 pl-4 md:pl-10">
         {/* need to add suspense */}
-        <BrowseFilter filterData={filterData}></BrowseFilter>
+        <Suspense>
+          <BrowseFilter filterData={filterData}></BrowseFilter>
+        </Suspense>
+
         <Suspense fallback={<LoadingDisplay></LoadingDisplay>}>
           <BrowseDisplay data={browseData}></BrowseDisplay>
         </Suspense>
