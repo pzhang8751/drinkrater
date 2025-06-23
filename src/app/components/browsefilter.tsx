@@ -1,9 +1,7 @@
 "use client";
 
-import Form from "next/form";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import React, { Ref, RefObject } from "react";
-import FilterCheckbox from "./filtercheckbox";
+import { useRouter, useSearchParams } from "next/navigation";
+import React, { RefObject } from "react";
 import { use, useRef } from "react";
 
 type Data = {
@@ -24,7 +22,7 @@ export default function BrowseFilter({
   const url = new URLSearchParams();
 
   const brandForm = useRef<HTMLFormElement>(null);
-  const typeForm = useRef();
+  const typeForm = useRef<HTMLFormElement>(null);
 
   function submitBrand() {
     if (brandForm.current != null) {

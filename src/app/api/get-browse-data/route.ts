@@ -9,19 +9,36 @@ if (uri) {
     client = new MongoClient(uri);
 }
 
+type Query = {
+  name? : object
+  brand? : object
+  type? : object
+}
+
 export async function GET(request: NextRequest) { 
   try {
     await client.connect();
 
     const searchParams = request.nextUrl.searchParams;
     const search = searchParams.get("search");
+    const brand = searchParams.getAll("brand");
+    const type = searchParams.getAll("type")
+
     // let page = Number(searchParams.get("page"));
 
     const db = client.db("main_data").collection("drink_collection");
-    let query = {}; 
+    let query: Query = {}; 
 
     if (search !== null) {
-        query = { "name": { $regex: `${search}`, $options: "i"} };
+        query.name = { $regex: `${search}`, $options: "i"} ;
+    }
+
+    if (brand.length > 0) {
+      query.brand = {$in: brand}
+    }
+
+    if (type.length > 0) {
+      query.type = {$in: type}
     }
 
     // 20 is the max number of searches per page currently
@@ -42,11 +59,4 @@ export async function GET(request: NextRequest) {
   } finally {
     await client.close();
   }
-
-  //   const brand = searchParams.get("brand");
-  //   const type = searchParams.get("type");
-  // change to fetching one at a time
-
-  // i think its fine to ask for multiple entries at a time for the browsing
-  // when getting reviews - should get one review at a time
 }

@@ -9,12 +9,34 @@ import { getBrowseData, getFilterData } from "@/lib/db";
 export default async function Browse({
   searchParams,
 }: {
-  searchParams: Promise<{ search: string | undefined, brand: string | string[] | undefined }>;
+  searchParams: Promise<{
+    search: string | undefined;
+    brand: string | string[] | undefined;
+    type: string | string[] | undefined;
+  }>;
 }) {
-  const { search, brand } = await searchParams;
+  const { search, brand, type } = await searchParams;
 
-  const browseData = await getBrowseData(search);
-  const filterData = getFilterData(search); 
+  let brands: string[] | undefined = undefined;
+  if (brand !== undefined) {
+    if (Array.isArray(brand)) {
+      brands = brand;
+    } else {
+      brands = [brand];
+    }
+  }
+
+  let types: string[] | undefined = undefined;
+  if (type !== undefined) {
+    if (Array.isArray(type)) {
+      types = type;
+    } else {
+      types = [type];
+    }
+  }
+
+  const browseData = await getBrowseData(search, brands, types);
+  const filterData = getFilterData(search);
 
   return (
     <main className="min-h-screen py-16">
