@@ -28,30 +28,55 @@ export default function BrowseFilter({
     if (brandForm.current != null) {
       const formData = new FormData(brandForm.current);
 
-      const values = formData.getAll("brand");
+      const brandValues = formData.getAll("brand");
+      const typeValues = formData.getAll("type");
       const search = searchParams.get("search");
 
       if (search != null) {
         url.append("search", search);
       }
 
-      values.forEach((brand) => {
+      brandValues.forEach((brand) => {
         url.append("brand", brand.toString());
+      });
+
+      typeValues.forEach((type) => {
+        url.append("type", type.toString());
       });
 
       router.replace(`/browse?${url.toString()}`);
     }
   }
 
-  function submitType() {}
+  function submitType() {
+    if (typeForm.current != null) {
+      const formData = new FormData(typeForm.current);
+
+      const brandValues = formData.getAll("brand");
+      const typeValues = formData.getAll("type");
+      const search = searchParams.get("search");
+
+      if (search != null) {
+        url.append("search", search);
+      }
+
+      brandValues.forEach((brand) => {
+        url.append("brand", brand.toString());
+      });
+      
+      typeValues.forEach((type) => {
+        url.append("type", type.toString());
+      });
+
+      router.replace(`/browse?${url.toString()}`);
+    }
+  }
 
   function resetForm(ref: RefObject<HTMLFormElement>) {
     if (ref.current != null) {
       ref.current.reset();
     }
   }
-
-  function createFilter() {}
 
   function createBrands() {
     return data.brands.map((brand) => {
@@ -78,8 +103,10 @@ export default function BrowseFilter({
           <input
             type="checkbox"
             id={`check_${type}`}
-            name={type}
+            name="type"
+            value={type}
             className="mr-2 hover:cursor-pointer"
+            onClick={submitType}
           ></input>
           <label htmlFor={`check_${type}`}>{type}</label>
         </div>
@@ -99,24 +126,25 @@ export default function BrowseFilter({
             resetForm(brandForm);
             submitBrand();
           }}
-          className="px-2 py-1 place-self-start hover:cursor-pointer hover:text-orange-500 bg-black text-white"
+          className="place-self-start hover:cursor-pointer hover:text-orange-500 hover:underline underline-offset-2"
         >
           Reset
         </button>
       </form>
       <h2>Type</h2>
-      {/* <Form action={filterType}>
-        <div>
-          <input
-            type="checkbox"
-            className="mr-2"
-            id="check_type"
-            name="all"
-          ></input>
-          <label htmlFor="check_type">All</label>
-        </div>
+      <form ref={typeForm} className="flex flex-col">
         {createTypes()}
-      </Form> */}
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            resetForm(typeForm);
+            submitType();
+          }}
+          className="place-self-start hover:cursor-pointer hover:text-orange-500 hover:underline underline-offset-2"
+        >
+          Reset
+        </button>
+      </form>
     </div>
   );
 }

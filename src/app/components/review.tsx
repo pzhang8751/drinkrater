@@ -38,7 +38,7 @@ export function StaticReviewCard({
     <div className="p-2 w-full">
         <div className="flex flex-row items-center">
                   {createStars()}
-      <LikeButton _id={review._id} likes={review.likes}></LikeButton>
+      {/* <LikeButton key={"like_" + review._id} _id={review._id} likes={review.likes}></LikeButton> */}
         </div>
 
 

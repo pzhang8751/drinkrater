@@ -55,7 +55,7 @@ function ReviewForm({ name, isOpen, closeWindow }: PopUp) {
 
   function onSubmit() {
     // maybe possible to convert part of this to server functions and keep the rest window as a client side function
-    if (stars <= -1) {
+    if (stars <= 0) {
       setError("Please give a star rating");
     } else {
       fetch("/api/post-review", {

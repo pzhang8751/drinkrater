@@ -39,7 +39,7 @@ export default async function Browse({
   const filterData = getFilterData(search);
 
   return (
-    <main className="min-h-screen py-16 px-4">
+    <main className="min-h-screen py-16 px-4 md:px-8">
       {/* toy around with the top design being fixed */}
       {/* fixed bg-white w-full z-10 border-b pb-4 (for p)*/}
       {/* could also add a button that goes to the top when u the search bar goes past the visible area */}

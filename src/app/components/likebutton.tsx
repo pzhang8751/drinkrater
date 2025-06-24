@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 
 // need to test if this works by going into mongodb
@@ -15,10 +15,17 @@ export default function LikeButton({
   likes: number;
 }) {
   const [like, setLike] = useState(false);
+  const likeRef = useRef(like)
+
+  useEffect(() => {
+    console.log(_id + " " + like)
+    likeRef.current = like; 
+  }, [like])
 
   useEffect(() => {
     return () => {
-      if (like) {
+      if (likeRef.current) {
+        console.log(_id + " submitting")
         fetch(`/api/update-comment-like?id=${_id}`, { method: "PUT" });
       }
     };

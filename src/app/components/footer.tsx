@@ -4,8 +4,8 @@ export default function Footer() {
   const iconSize = 24;
 
   return (
-    <footer className="h-min w-full px-[2%] py-4 flex flex-row bg-black text-white items-center">
-      <h3 className="text-nowrap pr-4 font-bold text-lg">
+    <footer className="h-min w-full px-4 md:px-8 py-4 flex flex-row bg-black text-white items-center">
+      <h3 className="text-nowrap pr-4 font-bold text-md md:text-lg">
         Built by Patrick Zhang
       </h3>
       <div className="mr-10 ml-auto font-extralight grid grid-cols-2 gap-y-2 gap-x-1">
