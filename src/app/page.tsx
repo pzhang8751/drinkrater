@@ -21,7 +21,7 @@ export default function Home() {
         <SearchBarHome></SearchBarHome>
       </section>
 
-      <section className="mt-10">
+      {/* <section className="mt-10">
         <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6">
           Review Popular Drinks
         </h2>
@@ -33,7 +33,7 @@ export default function Home() {
           Try Something New...<br></br>Every Day!
         </h2>
         <p> Coming soon ... </p>
-      </section>
+      </section> */}
     </main>
   );
 }
