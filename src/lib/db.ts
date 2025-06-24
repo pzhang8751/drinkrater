@@ -4,15 +4,9 @@ export async function getBrowseData(
   types: string[] | undefined
 ) {
   // need to change localhost to the actual webpage when i deploy
-  let apiRoute = "http://localhost:3000/api/get-browse-data?";
-
-  // need to change is so that brands handles case where brand is just one
+  let apiRoute = "/api/get-browse-data?";
 
   const url = new URLSearchParams();
-
-  // console.log("Search " + search)
-  // console.log("brands " + brands)
-  // console.log("types " + types)
 
   if (search !== undefined) {
     url.append("search", search);
@@ -38,7 +32,7 @@ export async function getBrowseData(
 }
 
 export async function getFilterData(search: string | undefined) {
-  let apiRoute = "http://localhost:3000/api/get-filter-data";
+  let apiRoute = "/api/get-filter-data";
 
   if (search !== undefined) {
     apiRoute += `?search=${search}`;
@@ -50,7 +44,7 @@ export async function getFilterData(search: string | undefined) {
 }
 
 export async function getAverageStars(name: string) {
-  const apiRoute = `http://localhost:3000/api/get-star-data?drink=${name}`;
+  const apiRoute = `/api/get-star-data?drink=${name}`;
 
   const res = await fetch(apiRoute, { method: "GET" });
 
@@ -58,7 +52,7 @@ export async function getAverageStars(name: string) {
 }
 
 export async function getTopComments(name: string) {
-  const apiRoute = `http://localhost:3000/api/get-top-comments?drink=${name}`;
+  const apiRoute = `/api/get-top-comments?drink=${name}`;
 
   const res = await fetch(apiRoute, { method: "GET" });
 
