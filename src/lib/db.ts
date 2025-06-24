@@ -4,7 +4,7 @@ export async function getBrowseData(
   types: string[] | undefined
 ) {
   // need to change localhost to the actual webpage when i deploy
-  let apiRoute = "/api/get-browse-data?";
+  let apiRoute = `${process.env.NEXT_PUBLIC_API_URL}/api/get-browse-data?`;
 
   const url = new URLSearchParams();
 
@@ -32,7 +32,7 @@ export async function getBrowseData(
 }
 
 export async function getFilterData(search: string | undefined) {
-  let apiRoute = "/api/get-filter-data";
+  let apiRoute = `${process.env.NEXT_PUBLIC_API_URL}/api/get-filter-data`;
 
   if (search !== undefined) {
     apiRoute += `?search=${search}`;
@@ -44,7 +44,7 @@ export async function getFilterData(search: string | undefined) {
 }
 
 export async function getAverageStars(name: string) {
-  const apiRoute = `/api/get-star-data?drink=${name}`;
+  const apiRoute = `${process.env.NEXT_PUBLIC_API_URL}/api/get-star-data?drink=${name}`;
 
   const res = await fetch(apiRoute, { method: "GET" });
 
@@ -52,7 +52,7 @@ export async function getAverageStars(name: string) {
 }
 
 export async function getTopComments(name: string) {
-  const apiRoute = `/api/get-top-comments?drink=${name}`;
+  const apiRoute = `${process.env.NEXT_PUBLIC_API_URL}/api/get-top-comments?drink=${name}`;
 
   const res = await fetch(apiRoute, { method: "GET" });
 
