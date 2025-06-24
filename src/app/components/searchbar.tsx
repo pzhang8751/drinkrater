@@ -28,7 +28,7 @@ export default function SearchBar() {
   };
 
   return (
-    <div className="h-min py-1 px-3 w-max md:w-48 border rounded-4xl flex flex-row gap-x-2 place-self-center md:place-self-auto">
+    <div className="h-min py-1 px-3 w-max md:w-48 border rounded-4xl flex flex-row gap-x-2">
       <IoIosSearch className="self-center size-6" />
       <input
         type="text"

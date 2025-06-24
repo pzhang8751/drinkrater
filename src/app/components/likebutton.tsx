@@ -27,7 +27,7 @@ export default function LikeButton({
   if (like) {
     return (
       <React.Fragment>
-        <FaHeart onClick={() => setLike(false)} className="ml-auto"></FaHeart>
+        <FaHeart onClick={() => setLike(false)} className="ml-auto hover:cursor-pointer"></FaHeart>
         <p className="ml-1">{likes + 1}</p>
       </React.Fragment>
     );
@@ -37,7 +37,7 @@ export default function LikeButton({
     <React.Fragment>
       <FaRegHeart
         onClick={() => setLike(true)}
-        className="ml-auto"
+        className="ml-auto hover:cursor-pointer"
       ></FaRegHeart>
       <p className="ml-1">{likes}</p>
     </React.Fragment>

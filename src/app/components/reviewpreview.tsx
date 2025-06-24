@@ -36,14 +36,14 @@ export async function ReviewPreview({name} : {name:string}) {
       );
     }
 
-    return <p className="italic border-t">Be the first to leave a review</p>;
+    return <p className="h-20 md:h-0 italic border-t">Be the first to leave a review</p>;
   }
 
   return (
-    <React.Fragment>
+    <div>
       {createReviews()}
-      <ReviewDisplay></ReviewDisplay>
-    </React.Fragment>
+      {/* <ReviewDisplay></ReviewDisplay> */}
+    </div>
   );
 }
 

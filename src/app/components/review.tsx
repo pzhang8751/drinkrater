@@ -35,14 +35,14 @@ export function StaticReviewCard({
   }
 
   return (
-    <div className="p-2">
+    <div className="p-2 w-full">
         <div className="flex flex-row items-center">
                   {createStars()}
       <LikeButton _id={review._id} likes={review.likes}></LikeButton>
         </div>
 
 
-      <p>{review.comment}</p>
+      <p className="text-wrap break-words">{review.comment}</p>
     </div>
   );
 }

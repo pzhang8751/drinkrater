@@ -39,13 +39,13 @@ export default async function Browse({
   const filterData = getFilterData(search);
 
   return (
-    <main className="min-h-screen py-16">
+    <main className="min-h-screen py-16 px-4">
       {/* toy around with the top design being fixed */}
       {/* fixed bg-white w-full z-10 border-b pb-4 (for p)*/}
       {/* could also add a button that goes to the top when u the search bar goes past the visible area */}
       <SearchBar></SearchBar>
 
-      <div className="flex flex-row *:mt-4 *:md:mt-10 pl-4 md:pl-10">
+      <div className="flex flex-row *:mt-4 *:md:mt-10">
         {/* need to add suspense */}
         <Suspense>
           <BrowseFilter filterData={filterData}></BrowseFilter>

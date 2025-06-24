@@ -25,7 +25,7 @@ export default function ReviewButton({ name }: {name: string}) {
         onClick={() => {
           setOpen(true);
         }}
-        className="w-min p-2 text-xl place-self-end hover:cursor-pointer text-white bg-black hover:scale-90 transition ease-in-out hover:bg-pink-400"
+        className="mt-4 w-min p-2 text-xl place-self-end hover:cursor-pointer text-white bg-black hover:scale-90 transition ease-in-out hover:bg-pink-400"
       >
         Review
       </button>
@@ -83,23 +83,23 @@ function ReviewForm({ name, isOpen, closeWindow }: PopUp) {
           className="fixed top-0 left-0 w-screen h-screen bg-black opacity-25 z-10"
           onClick={resetWindow}
         ></div>
-        <div className="fixed top-[20%] left-[20%] bg-white w-[60%] h-[60%] z-20 p-2">
+        <div className="fixed top-[15%] left-[10%] w-[80%] md:left-[15%] md:w-[70%] lg:left-[25%] lg:w-[50%] h-min bg-white z-20 p-2 flex flex-col">
           <div className="flex flex-row w-full">
             <p className="font-bold text-xl">{name} Review</p>
             <button
               onClick={resetWindow}
-              className="py-1 px-2 bg-black text-white text-xl font-bold hover:scale-90 hover:cursor-pointer hover:bg-pink-400 justify-self-end"
+              className="ml-auto py-1 px-2 h-min bg-black text-white text-md font-bold hover:scale-90 hover:cursor-pointer hover:bg-pink-400 justify-self-end"
             >
               X
             </button>
           </div>
 
-          <Form action={onSubmit}>
+          <Form action={onSubmit} className="mt-2">
             <ReviewStars stars={stars} setStars={setStars}></ReviewStars>
-            <div className="p-2 border">
+            <div className="mt-2 p-2 border">
               <textarea
                 maxLength={300}
-                className="outline-none w-full resize-none"
+                className="outline-none w-full h-32 resize-none"
                 placeholder="Leave your thoughts here..."
                 value={comment}
                 onChange={(e) => {
@@ -113,7 +113,7 @@ function ReviewForm({ name, isOpen, closeWindow }: PopUp) {
             <p className="italic text-red-500 font-light">{error}</p>
             <button
               type="submit"
-              className="py-2 px-3 text-white bg-black hover:cursor-pointer hover:scale-90 hover:bg-pink-400"
+              className="mt-2 py-2 px-3 text-white bg-black hover:cursor-pointer hover:scale-90 hover:bg-pink-400"
             >
               Submit
             </button>

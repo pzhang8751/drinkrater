@@ -16,7 +16,7 @@ export default async function BrowseDisplay({
   if (data != undefined) {
     if (data.length > 0) {
       return (
-        <div className="w-full grow gap-x-10 grid grid-cols-1 md:grid-cols-4 gap-y-4 md:gap-y-8 justify-items-center">
+        <div className="w-full grow grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-4 md:gap-y-8 justify-items-center">
           {data.map((drink: Drink) => {
             return (
               <Card
@@ -37,7 +37,7 @@ export default async function BrowseDisplay({
 function Card({ brand, name }: { brand: string; name: string }) {
   return (
     <Link href={`/drink/${name}/${brand}/soda`}>
-      <div className="min-h-max w-48 flex-col px-3 py-3 border-black border transition hover:-translate-y-3 hover:shadow-md shadow-black">
+      <div className="min-h-max w-48 md:w-58 flex-col px-3 py-3 border-black border transition hover:-translate-y-3 hover:shadow-md shadow-black">
         <Image
           src="/drinkImages/Coca-Cola.jpg"
           alt="image of drink"

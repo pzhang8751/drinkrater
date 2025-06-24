@@ -62,7 +62,7 @@ export default function BrowseFilter({
             id={`check_${brand}`}
             name="brand"
             value={brand}
-            className="mr-2"
+            className="mr-2 hover:cursor-pointer"
             onClick={submitBrand}
           ></input>
           <label htmlFor={`check_${brand}`}>{brand}</label>
@@ -79,7 +79,7 @@ export default function BrowseFilter({
             type="checkbox"
             id={`check_${type}`}
             name={type}
-            className="mr-2"
+            className="mr-2 hover:cursor-pointer"
           ></input>
           <label htmlFor={`check_${type}`}>{type}</label>
         </div>
@@ -88,19 +88,10 @@ export default function BrowseFilter({
   }
 
   return (
-    <div className="w-16 md:w-48 border-r [&>h2]:font-semibold [&>h2]:text-md [&>h2]:md:text-xl ">
+    <div className="w-20 pr-2 md:w-40 md:mr-4 md:border-r [&>h2]:font-semibold [&>h2]:text-md [&>h2]:md:text-xl flex flex-col gap-y-2">
       <h1 className="font-bold w-16 md:w-48 text-xl md:text-5xl">Filter</h1>
       <h2>Brand</h2>
       <form ref={brandForm} className="flex flex-col">
-        {/* <div>
-          <input
-            type="checkbox"
-            className="mr-2"
-            id="check_brand"
-            name="all"
-          ></input>
-          <label htmlFor="check_brand">All</label>
-        </div> */}
         {createBrands()}
         <button
           onClick={(e) => {
@@ -108,8 +99,9 @@ export default function BrowseFilter({
             resetForm(brandForm);
             submitBrand();
           }}
+          className="px-2 py-1 place-self-start hover:cursor-pointer hover:text-orange-500 bg-black text-white"
         >
-          Reset filters
+          Reset
         </button>
       </form>
       <h2>Type</h2>

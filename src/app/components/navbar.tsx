@@ -1,9 +1,4 @@
-"use client";
-
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useState } from "react";
-import clsx from "clsx";
 
 interface Menu {
   open: () => void;
@@ -12,34 +7,27 @@ interface Menu {
 }
 
 export default function NavBar() {
-  const pathName = usePathname();
-
-  const [openDropdown, setDropdown] = useState(false);
 
   return (
     <>
-      <nav className="px-[2%] h-16 w-screen fixed grid grid-cols-4 bg-white gap-x-4 text-sm sm:text-lg z-20">
-        <Link href="/" className="w-min self-center font-bold underline-offset-4 hover:underline">
+      <nav className="px-4 md:px-8 h-16 w-screen fixed flex flex-row bg-white gap-x-4 text-sm sm:text-lg z-20 items-center">
+        <Link href="/" className="w-min font-bold underline-offset-4 hover:underline">
           Drinkrater
         </Link>
-        <div className="col-span-2 grid grid-cols-3 gap-x-4 place-items-center text-nowrap">
-          <Link href="/" className="hover:text-red-500">
+        <div className="ml-auto">
+          {/* <Link href="/" className="hover:text-red-500">
             Daily Drink
-          </Link>
+          </Link> */}
           <Link
             id="browse"
             href="/browse"
-            className={clsx("hover:text-red-500", {
-              "text-red-500": pathName.includes("/browse"),
-            })}
-            onMouseEnter={() => setDropdown(true)}
-            onClick={() => setDropdown(false)}
+            className="hover:text-red-500"
           >
             Browse
           </Link>
-          <Link href="/" className="hover:text-red-500">
+          {/* <Link href="/" className="hover:text-red-500">
             My Account
-          </Link>
+          </Link> */}
         </div>
       </nav>
     </>

@@ -7,12 +7,12 @@ import { Suspense } from "react";
 export default function ReviewContainer({ name }: {name: string}) {
 
   return (
-    <section className="flex flex-col">
-      <Suspense fallback={<StarDisplayFallBack size={40}></StarDisplayFallBack>}>
-        <StarDisplay name={name} size={40}></StarDisplay>
+    <section className="mt-2 flex flex-col">
+      <Suspense fallback={<StarDisplayFallBack></StarDisplayFallBack>}>
+        <StarDisplay name={name}></StarDisplay>
       </Suspense>
 
-      <h2 className="font-semibold">Recent Reviews</h2>
+      <h2 className="mt-2 font-semibold">Recent Reviews</h2>
       <Suspense fallback={<ReviewPreviewFallBack></ReviewPreviewFallBack>}>
         <ReviewPreview name={name}></ReviewPreview>
       </Suspense>
