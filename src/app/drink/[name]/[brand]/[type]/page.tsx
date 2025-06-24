@@ -19,8 +19,8 @@ export default async function DrinkPage({ params }: { params: Promise<Prop> }) {
       <div className="md:mr-6 place-items-center border relative h-[40vh] md:w-[50vw] md:h-full">
         {/* Need to add sizes prop to image */}
         <Image
-          src="/drinkImages/Coca-Cola.jpg"
-          alt="Image of drink"
+          src={`/drinkImages/${name}.jpg`}
+          alt={`Image of ${name}`}
           fill={true}
           objectFit="contain"
         ></Image>

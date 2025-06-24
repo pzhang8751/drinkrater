@@ -39,8 +39,8 @@ function Card({ brand, name }: { brand: string; name: string }) {
     <Link href={`/drink/${name}/${brand}/soda`}>
       <div className="min-h-max w-48 md:w-58 flex-col px-3 py-3 border-black border transition hover:-translate-y-3 hover:shadow-md shadow-black">
         <Image
-          src="/drinkImages/Coca-Cola.jpg"
-          alt="image of drink"
+          src={`/drinkImages/${name}.jpg`}
+          alt={`Image of ${name}`}
           width={200}
           height={400}
           className="border border-black mb-3 w-full"
