@@ -13,6 +13,7 @@
     "@vercel/postgres": "^0.9.0",
     "clsx": "^2.1.1",
     "form": "^0.2.5",
+    "mongodb": "^6.17.0",
     "next": "^15.3.3",
     "react": "^18",
     "react-dom": "^18",
